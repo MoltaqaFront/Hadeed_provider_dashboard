@@ -251,7 +251,7 @@ export default {
         });
         this.isWaitingRequest = false;
         this.$message.success(this.$t("MESSAGES.addedSuccessfully"));
-        this.$router.push({ path: "/admins/all" });
+        this.$router.push({ path: "/providers/all" });
       } catch (error) {
         this.isWaitingRequest = false;
         this.$message.error(error.response.data.message);

@@ -650,8 +650,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "orders index",
-                subject: "orders",
+                action: "order_items index",
+                subject: "order_items",
               },
             },
           },
@@ -663,8 +663,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "orders create",
-                subject: "offers",
+                action: "order_items create",
+                subject: "order_items",
               },
             },
           },
@@ -675,8 +675,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "orders show",
-                subject: "orders",
+                action: "order_items show",
+                subject: "order_items",
               },
             },
           },
@@ -1823,8 +1823,8 @@ const routes = [
         meta: {
           middleware: [auth],
           requiresPermission: {
-            action: "settings create",
-            subject: "settings",
+            action: "provider_contacts edit",
+            subject: "provider_contacts",
           },
         },
       },
@@ -1945,7 +1945,7 @@ const routes = [
 
       // Start:: Admins Routes Config
       {
-        path: "/admins",
+        path: "/providers",
         name: "AdminsHome",
         component: AdminsHome,
         meta: {
@@ -1959,8 +1959,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users index",
-                subject: "users",
+                action: "provider_admins index",
+                subject: "provider_admins",
               },
             },
           },
@@ -1971,8 +1971,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users create",
-                subject: "users",
+                action: "provider_admins create",
+                subject: "provider_admins",
               },
             },
           },
@@ -1984,8 +1984,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users edit",
-                subject: "users",
+                action: "provider_admins edit",
+                subject: "provider_admins",
               },
             },
           },
@@ -1997,8 +1997,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users show",
-                subject: "users",
+                action: "provider_admins show",
+                subject: "provider_admins",
               },
             },
           },

@@ -444,12 +444,14 @@
       "serialNumber": "Serial",
       "orderNumber": "Order Number",
       "clientName": "Client Name",
-      "OrderPrice": "Order Price",
+      "OrderPrice": "Total Order Price",
       "orderType": "Order Type",
       "service": "Service",
       "driverName": "Driver Name",
       "Provider": "Provider",
       "totalPrice": "Total Price",
+      "delivered_date" : "Delivered Date" ,
+      "delivered_time" : "Delivered Time" ,
       "orderDate": "Order Date",
       "orderStatus": "Order Status",
       "actions": "Actions"
@@ -1051,7 +1053,7 @@
     "Tax_registration": "Tax registration",
     "Company_logo": "Company logo",
     "WhatsApp_contact": "WhatsApp contact",
-
+      "contact_admins": "Contact with Provider",
     "phone_call": "Calling Phone",
 
     "user_name": "User Name",
@@ -1099,7 +1101,7 @@
     "canceled_requests_count": "Canceled Orders Count",
     "ongoing_requests_count": "Ongoing Orders Count",
     "rejected_requests_count": "Rejected Orders Count",
-   "total requests": "The total number of requests in the system.",
+   "total_requests": "The total number of requests in the system.",
     "number_of_accepted_orders": "Number Of Accepted Orders",
     "discount_percentage_on_booking": "Discount Percentage %",
     "contact_service_admin": "Contact Service admin",

@@ -450,9 +450,11 @@
 
       "totalPrice": "السعر الكلي",
       "orderDate": "تاريخ الطلب",
+      "delivered_date" : "تاريخ التسليم" ,
+      "delivered_time" : "وقت التسليم" ,
       "orderStatus": "حالة الطلب",
       "actions": "التحكم",
-      "OrderPrice": "سعر الطلب "
+      "OrderPrice": " إجمالي سعر الطلب "
     },
     "Rates": {
       "rates": "التعليقات",
@@ -1087,7 +1089,7 @@
     "Completed_order_points": "نقاط الطلبات المكتملة",
     "One_riyal_equals_points": "عدد واحد ريال = عدد () نقطة",
 
-    "contact_admins": "التواصل مع الإدارة",
+    "contact_admins": "التواصل مع المورد ",
     "WhatsApp_contact": "واتساب التواصل",
 
     "facebook_link": "رابط فيسبوك",
