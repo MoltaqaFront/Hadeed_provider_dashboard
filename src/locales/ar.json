@@ -157,7 +157,12 @@
     "Products": {
       "title": "المنتجات",
       "showAll": "كل المنتجات",
-      "add": "إضافة منتج جديد"
+      "add": "إضافة منتج جديد" ,
+      "Total" : "إجمالي سعر المنتجات" ,
+      "tax" : "قيمة الضريبة المضافة" ,
+      "order_total" : "إجمالي الطلب" ,
+      "canacel" : "سبب إلغاء الطلب",
+      "reject" : "سبب رفض الطلب"
     },
     "Orders": {
       "title": "الطلبات",
@@ -770,6 +775,7 @@
     "commercial_register": "السجل التجاري",
     "measures": "القياس",
     "type": "النوع",
+    "notes" : "ملاحظات",
     "messageType": "نوع الرسالة",
     "measure_name": "اسم وحدة القياس",
     "view_measure_data": "وحدة القياس",
@@ -816,6 +822,7 @@
     "descEn": "الوصف بالإنجليزية",
     "gender": "النوع",
     "country": "الدولة",
+    "num_count" : "كمية المنتج",
     "address": "العنوان",
     "longitude": "خطوط الطول",
     "latitude": "دوائر العرض",
@@ -841,6 +848,8 @@
     "endDate": "تاريخ النهاية",
     "messageReplay": "الرد علي الرسالة",
     "role": "الدور",
+
+    "chat_display": "عرض الشات",
     "editPassword": "تعديل كلمة المرور",
     "view_cart_data": "عرض بيانات السلة",
     "export_pdf": "تصدير ك بي دي إف",
@@ -1140,11 +1149,12 @@
     "marina": "المرسى",
     "distinctive_mark": "علامة مميزة",
     "location_icon": "أيقونة الموقع",
-    "departure_to": "الوجهة إلى",
+    "departure_to": "عنوان التسليم",
     "trip_data": "بيانات الرحلة",
     "trip_type": "نوع الرحلة",
     "booking_type": "نوع الحجز",
     "trip_date": "تاريخ الرحلة",
+    "adress_name" : "اسم العنوان ",
     "duration": "المدة",
     "arrival_time": "وقت الحضور",
     "departure_time": "وقت الانطلاق",

@@ -153,7 +153,12 @@
     "Products": {
       "title": "Products",
       "showAll": "All Products",
-      "add": "Add New Product"
+      "add": "Add New Product" ,
+      "Total": "Total price of products",
+       "tax": "value added tax" ,
+       "order_total": "order total",
+       "canacel": "Reason for canceling the order",
+       "reject": "The reason for rejecting the request"
     },
     "Orders": {
       "title": "Orders",
@@ -753,6 +758,7 @@
     "edit_products": "Edit Product",
     "weight": "Weight",
     "measure": "Measure",
+    "notes" : "Notes",
     "unit": "unit",
     "desc": "Description",
     "product_name": "Product Name",
@@ -771,6 +777,7 @@
     "fewer_product": "minimum purchase quantity of the product",
     "date": "Date",
     "productName": "Product Name",
+    "num_count" : "product quantity",
     "productDate": "Product Date",
     "productSize": "Product Size",
     "productPrice": "productPrice",
@@ -788,6 +795,7 @@
     "phone": "Phone Number",
     "secondPhone": "Second Phone Number",
     "password": "Password",
+    "chat_display": "Chat Display",
     "confirmPassword": "Confirm Password",
     "userName": "User Name",
     "writeHere": "Write Here",
@@ -1128,8 +1136,9 @@
     "marina": "Marina",
     "distinctive_mark": "Distinctive Mark",
     "location_icon": "Location Icon",
-    "departure_to": "Departure To",
+    "departure_to": "Delivery Address",
     "trip_data": "Trip Data",
+    "adress_name" : "Address Name",
     "trip_type": "Trip Type",
     "booking_type": "Booking Type",
     "trip_date": "Trip Date",

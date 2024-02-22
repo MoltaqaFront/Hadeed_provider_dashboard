@@ -46,6 +46,7 @@ import CartsHome from "../views/Cruds/Carts/Home.vue";
 import CategoryHome from "../views/Cruds/Category/Home.vue";
 import ChangePhoneNumberForm from "../views/Auth/ChangePhoneNumber.vue";
 import CharacteristicsHome from "../views/Cruds/Characteristics/Home.vue";
+import ChatHome from "../views/Cruds/Chat/Home.vue";
 import CitiesHome from "../views/Cruds/Cities/Home.vue";
 import ClientsHome from "../views/Cruds/Clients/Home.vue";
 import ContactMessagesHome from "../views/Cruds/ContactMessages/Home.vue";
@@ -125,6 +126,7 @@ import ShowBanks from "../views/Cruds/Banks/Show.vue";
 import ShowCarts from "../views/Cruds/Carts/Show.vue";
 import ShowCategory from "../views/Cruds/Category/Show.vue";
 import ShowCharacteristics from "../views/Cruds/Characteristics/Show.vue";
+import ShowChat from "../views/Cruds/Chat/Show.vue";
 import ShowCities from "../views/Cruds/Cities/Show.vue";
 import ShowClient from "../views/Cruds/Clients/Show.vue";
 import ShowCountries from "../views/Cruds/Countries/Show.vue";
@@ -1414,6 +1416,32 @@ const routes = [
         ],
       },
       // End:: news_tapes Config
+
+      // Start:: Chat Routes Config
+      {
+        path: "/chat",
+        name: "ChatHome",
+        component: ChatHome,
+        meta: {
+          middleware: [auth],
+        },
+        children: [
+          {
+            path: "show/:id",
+            name: "ShowChat",
+            component: ShowChat,
+            props: true,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "chats show",
+                subject: "chats",
+              },
+            },
+          },
+        ],
+      },
+      // End:: Chat Routes Config
 
       // Start:: golden-deals  Config
       {
