@@ -206,7 +206,7 @@ export default {
         this.data.descAr = res.data.data.Product.description_ar;
         this.data.mainCategory = res.data.data.Product.category;
         this.data.subCategory = res.data.data.Product.sub_category;
-        this.data.price = res.data.data.Product.price;
+        this.data.price = res.data.data.Product.offer.price;
         this.data.measure = res.data.data.Product.measure;
         this.data.unit = res.data.data.Product.unit;
         this.data.weight = res.data.data.Product.weight;

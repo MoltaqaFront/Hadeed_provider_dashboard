@@ -37,6 +37,9 @@
       "showAll": "كل العملاء",
       "add": "إضافة مستخدم جديد"
     },
+    "Provider": {
+      "data": "بيانات المورد"
+    },
     "Drivers": {
       "title": "السائقين",
       "showAll": "كل السائقين",
@@ -101,13 +104,13 @@
       "showAll": "كل المساحات الإعلانية",
       "add": "إضافة مساحه إعلانية جديدة"
     },
-     "delivery": {
+    "delivery": {
       "title": "سعر التوصيل",
       "showAll": "كل  الصفقات الذهبية",
       "add": "إضافة سعر توصيل جديد",
       "edit": "تعديل سعر توصيل "
     },
-     "golden": {
+    "golden": {
       "title": " الصفقات الذهبية",
       "showAll": "كل  الصفقات الذهبية",
       "add": "إضافة صفقة ذهيبة جديدة",
@@ -164,26 +167,26 @@
       "showAll": "كل الطلبات",
       "add": "اضافة طلب جديد"
     },
-     "News_tap": {
+    "News_tap": {
       "title": "الشريط الإخباري",
       "name": "الخبر",
       "showAll": "كل الطلبات",
-      "type" : "نوع الخبر",
-      "add": "اضافة خبر جديد" ,
-      "edit" : "تعديل خبر"
+      "type": "نوع الخبر",
+      "add": "اضافة خبر جديد",
+      "edit": "تعديل خبر"
     },
-     "advertisement": {
+    "advertisement": {
       "title": "المساحة الإعلانية",
       "name": "اسم الاعلان",
-      "image" : "صورة الاعلان" ,
+      "image": "صورة الاعلان",
       "Start_publich": "تاريخ بداية النشر",
-      "End_publich" : "تاريخ نهاية النشر",
-      "date" : "تاريخ الإنشاء",
+      "End_publich": "تاريخ نهاية النشر",
+      "date": "تاريخ الإنشاء",
       "showAll": "كل الطلبات",
-      "type" : "نوع الخبر",
-      "add": "اضافة إعلان جديد" ,
-      "show" : "عرض بيانات الاعلان",
-      "edit" : "تعديل بيانات الاعلان "
+      "type": "نوع الخبر",
+      "add": "اضافة إعلان جديد",
+      "show": "عرض بيانات الاعلان",
+      "edit": "تعديل بيانات الاعلان "
     },
     "Carts": {
       "title": "السلة"
@@ -212,15 +215,15 @@
     },
     "FinancialReports": {
       "serialNumber": "المسلسل",
-      "name" : "المورد" ,
+      "name": "المورد",
       "driverName": "اسم المورد ",
       "driverPhone": "رقم جوال المورد",
       "providerPhone": "رقم جوال مقدم الخدمة",
       "totalProductsInProcessing": "إجمالي الطلبات غير المنتهية",
       "totalServicesEnded": "إجمالي الطلبات المنتهية",
       "profit_provider": "إجمالي ربح المورد",
-      "totalapp": "إجمالي ربح التطبيق" ,
-      "total_salaey" : "إجمالي الضريبة المضافة"
+      "totalapp": "إجمالي ربح التطبيق",
+      "total_salaey": "إجمالي الضريبة المضافة"
     },
     "DeactivateReasons": {
       "serialNumber": "المسلسل",
@@ -263,7 +266,7 @@
       "all": "الكل",
       "type": "نوع العميل"
     },
-     "Golden": {
+    "Golden": {
       "serialNumber": "المسلسل",
       "name": "اسم الصفقة",
       "nameAr": "اسم الصفقة بالعربية",
@@ -271,13 +274,13 @@
       "phone": "رقم الجوال",
       "email": "البريد الإلكتروني",
       "joiningDate": "تاريخ الإنشاء",
-      "area" : "المنطقة ",
-      "city": "المدينة" ,
+      "area": "المنطقة ",
+      "city": "المدينة",
       "verified": "تم التحقق",
       "active": "حالة الشراء",
       "actions": "التحكم",
       "indivdual": "اسم المشتري",
-      "status" : "الحالة",
+      "status": "الحالة",
       "all": "الكل"
     },
     "Drivers": {
@@ -499,14 +502,14 @@
     "confirmed": " تم تأكيد الطلب",
     "Processing_in_progress": "جاري التجهيز",
     "awaiting_review": "انتظار المراجعة",
-    "buy": "تم الشراء" ,
-    "notBuy" : "لم يتم الشراء" ,
-    "in_cart" : "فى سلة عميل",
+    "buy": "تم الشراء",
+    "notBuy": "لم يتم الشراء",
+    "in_cart": "فى سلة عميل",
     "published": "منشور",
     "notPublished": "غير منشور",
-    "all": "الكل" ,
-    "add" : "زيادة" ,
-    "miuns" : "نقصان"
+    "all": "الكل",
+    "add": "زيادة",
+    "miuns": "نقصان"
   },
 
   "CHARTS": {
@@ -751,6 +754,8 @@
     "image": "الصورة",
     "status": "الحالة",
     "products": "المنتجات",
+    "companyName": "اسم الشركة",
+    "providerName": "اسم المورد",
     "add_new_product": "اضافة منتج جديد",
     "product_name": "اسم المنتج",
     "productImage": "صورة المنتج",
@@ -771,8 +776,8 @@
     "messageType": "نوع الرسالة",
     "measure_name": "اسم وحدة القياس",
     "view_measure_data": "وحدة القياس",
-    "measure_product" : "وحدة القياس المنتج" ,
-    "fewer_product" : "أقل كمية شراء من المنتج",
+    "measure_product": "وحدة القياس المنتج",
+    "fewer_product": "أقل كمية شراء من المنتج",
     "providers": "الموزعين",
     "productName": "اسم المنتج",
     "productDate": "تاريخ اضافة المنتج",
@@ -786,7 +791,7 @@
     "date": "التاريخ",
     "name": "الإسم",
     "email": "البريد الإلكتروني",
-    "add_date" : " تاريخ الإضافة",
+    "add_date": " تاريخ الإضافة",
     "mobileNumber": "رقم الجوال",
     "phoneNumber": "رقم الهاتف",
     "secondPhone": "رقم هاتف اخر",
@@ -794,8 +799,8 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "phone": "رقم الجوال",
     "userName": "إسم المستخدم",
-    "price_before" : "سعر الصفقة قبل الخصم" ,
-    "price_after" : "سعر الصفقة بعد الخصم" ,
+    "price_before": "سعر الصفقة قبل الخصم",
+    "price_after": "سعر الصفقة بعد الخصم",
     "writeHere": "اكتب هنا",
     "searchForEmoji": "ابحث عن Emoji",
     "price": "السعر",
@@ -820,8 +825,8 @@
     "area": "المنطقة",
     "user": "المستخدم",
     "client": "العميل",
-    "des_ar" : "وصف الصفقة بالعربية" ,
-    "des_en" : "وصف الصفقة بالانجليزية" ,
+    "des_ar": "وصف الصفقة بالعربية",
+    "des_en": "وصف الصفقة بالانجليزية",
     "additionalFile": "ملف إضافي",
     "comment": "تعليق",
     "personalImage": "الصورة الشخصية",
@@ -901,7 +906,7 @@
     "Indoor": "داخلي",
     "Outdoor": "خارجي",
     "session_type": "نوع الجلسة",
-    "Quantity" : "الكمية",
+    "Quantity": "الكمية",
     "typeProduct": "توصيل",
     "typeService": "سفري",
     "Overall_statistics": "الاحصائيات الاجمالية",
@@ -1104,7 +1109,7 @@
     "edit_vehicle": "تعديل بيانات المركبة",
 
     "new_requests_count": "إجمالي أعضاء النظام",
-    "provider_total" : "عدد الموردين",
+    "provider_total": "عدد الموردين",
     "incomplete_requests_count": "عدد الطلبات غير المكتملة",
     "completed_requests_count": "عدد الطلبات المنتهية",
     "canceled_requests_count": "عدد الطلبات الملغية",
@@ -1207,9 +1212,9 @@
     "view_property_section": "عرض قسم عقار",
 
     "neighborhood_name": "اسم الحي",
-    "package_golden_incart" : "مدة بقاء الصفقة الذهبية فى سلة العميل",
-    "package_notifation" : "المدة بين الاشعارات المرسلة لتأكيد الطلب" ,
-    "present": "نسبة عمولة التطبيق" ,
+    "package_golden_incart": "مدة بقاء الصفقة الذهبية فى سلة العميل",
+    "package_notifation": "المدة بين الاشعارات المرسلة لتأكيد الطلب",
+    "present": "نسبة عمولة التطبيق",
     "number_of_reports_to_block_auto_ad": "عدد البلاغات لحجب إعلان تلقائي",
     "number_of_free_package_ads": "عدد إعلانات الباقة المجانية",
     "free_package_expiry_duration": "مدة انتهاء الباقة المجانية (بالايام)",
@@ -1282,7 +1287,7 @@
     "no_notifications": "لا يوجد إشعارات",
     "current_balance": "الرصيد الحالى من الاعلانات",
     "bank_accounts_settings": "إعدادات الحسابات البنكية",
-    "delivery_price" : "إعدادات سعر التوصيل",
+    "delivery_price": "إعدادات سعر التوصيل",
     "show_advertiser_image_logo": "اظهار صورة/شعار المعلن عن العقار"
   },
 
@@ -1339,14 +1344,14 @@
     "commericalProfile": "يجب اختيار صورة الملف التجاري ",
     "taxProfile": "يجب اختيار صورة الملف الضريبي",
     "free_package_ads_field_required": "حقل عدد إعلانات الباقة المجانية مطلوب",
-    "free_package_duration_field_required": "حقل مدة انتهاء الباقة المجانية مطلوب" ,
-    "type_news" : "يجب اختيار نوع الخبر" ,
-    "des_ar" : "حقل وصف الصفقة بالعربيه لا يمكن أن يكون فارغا" ,
-    "des_en" : "حقل وصف الصفقة بالانجليزية لا يمكن أن يكون فارغا" ,
-    "maim_category" : "يجب اختيار التصنيف الرئيسي" ,
-    "sub_category" : "يجب اختيار التصنيف الفرعى" ,
-    "product" : "يجب اختيار المنتج" ,
-     "content_arabic_required": "يجب إدخال المحتوى بالعربية",
+    "free_package_duration_field_required": "حقل مدة انتهاء الباقة المجانية مطلوب",
+    "type_news": "يجب اختيار نوع الخبر",
+    "des_ar": "حقل وصف الصفقة بالعربيه لا يمكن أن يكون فارغا",
+    "des_en": "حقل وصف الصفقة بالانجليزية لا يمكن أن يكون فارغا",
+    "maim_category": "يجب اختيار التصنيف الرئيسي",
+    "sub_category": "يجب اختيار التصنيف الفرعى",
+    "product": "يجب اختيار المنتج",
+    "content_arabic_required": "يجب إدخال المحتوى بالعربية",
     "content_english_required": "يجب إدخال المحتوى بالانجليزية"
   },
 

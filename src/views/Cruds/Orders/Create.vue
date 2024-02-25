@@ -49,6 +49,7 @@
               getGoldenOffers();
             "
           />
+
           <!-- start category -->
           <base-select-input
             col="6"
@@ -194,6 +195,7 @@ export default {
         console.log(error.response.data.message);
       }
     },
+    // end get districts
     // start main category
     async getMainCategories() {
       try {

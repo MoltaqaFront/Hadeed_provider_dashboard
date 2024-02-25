@@ -32,6 +32,9 @@
       "showAll": "All Users",
       "add": "Add New User"
     },
+    "Provider": {
+      "data": "Provider Data"
+    },
     "notifications": {
       "title": "Notifications",
       "showAll": "All Notifications",
@@ -97,18 +100,18 @@
       "add": "Add New Ad Space"
     },
     "delivery": {
-       "title": "Delivery price",
-       "showAll": "All Gold Deals",
-       "add": "Add a new delivery price",
-       "edit": "Modify delivery price"
-     },
+      "title": "Delivery price",
+      "showAll": "All Gold Deals",
+      "add": "Add a new delivery price",
+      "edit": "Modify delivery price"
+    },
     "golden": {
       "title": "Golden Deals",
       "showAll": "All Gold Deals",
       "add": "Add New Gold Deal",
       "show": "Show The Golden Deal",
       "edit": "Edit Golden Deal"
-     },
+    },
     "Areas": {
       "areas": "Areas",
       "title": "Areas",
@@ -169,26 +172,26 @@
       "title": "Carts"
     },
     "News_tap": {
-       "title": "News Tape",
-       "name": "News",
-       "showAll": "All orders",
-       "type" : "Type of news",
-       "add": "Add New News",
-       "edit": "Edit News"
-     },
-     "advertisement": {
-       "title": "Advertising Space",
-       "name": "Ad Name",
-       "image": "Advertising Image",
-       "Start_publich": "Publish Start Date",
-       "End_publich" : "Publication End Date",
-       "date" : "Creation Date",
-       "showAll": "All Orders",
-       "type": "type of news",
-       "add": "Add a New Ad",
-       "show": "Show Advertisement Data",
-       "edit": "Edit Ad Data"
-     },
+      "title": "News Tape",
+      "name": "News",
+      "showAll": "All orders",
+      "type": "Type of news",
+      "add": "Add New News",
+      "edit": "Edit News"
+    },
+    "advertisement": {
+      "title": "Advertising Space",
+      "name": "Ad Name",
+      "image": "Advertising Image",
+      "Start_publich": "Publish Start Date",
+      "End_publich": "Publication End Date",
+      "date": "Creation Date",
+      "showAll": "All Orders",
+      "type": "type of news",
+      "add": "Add a New Ad",
+      "show": "Show Advertisement Data",
+      "edit": "Edit Ad Data"
+    },
     "Logout": {
       "title": "logout"
     }
@@ -224,18 +227,18 @@
       "active": "Active",
       "actions": "Actions"
     },
-   "FinancialReports": {
-       "serialNumber": "serial",
-       "name" : "Provider" ,
-       "driverName": "Provider name",
-       "driverPhone": "Provider's mobile number",
-       "providerPhone": "service provider's mobile number",
-       "totalProductsInProcessing": "Total unfinished orders",
-       "totalServicesEnded": "Total finished orders",
-       "profit_provider": "Provider's gross profit",
-       "totalapp": "Total app profit",
-       "total_salaey": "Total added tax"
-     },
+    "FinancialReports": {
+      "serialNumber": "serial",
+      "name": "Provider",
+      "driverName": "Provider name",
+      "driverPhone": "Provider's mobile number",
+      "providerPhone": "service provider's mobile number",
+      "totalProductsInProcessing": "Total unfinished orders",
+      "totalServicesEnded": "Total finished orders",
+      "profit_provider": "Provider's gross profit",
+      "totalapp": "Total app profit",
+      "total_salaey": "Total added tax"
+    },
     "Notifications": {
       "serialNumber": "Serial",
       "title": "Title",
@@ -250,22 +253,22 @@
       "reason": "Deactivate Reason"
     },
     "Golden": {
-       "serialNumber": "serial",
-       "name": "Transaction name",
-       "nameAr": "Name of the deal in Arabic",
-       "nameEn": "English name of the transaction",
-       "phone": "mobile number",
-       "email": "Email",
-       "joiningDate": "Creation date",
-       "area": "area",
-       "city": "city",
-       "verified": "verified",
-       "active": "purchase status",
-       "actions": "control",
-       "indivdual": "buyer's name",
-       "status": "status",
-       "all": "all"
-     },
+      "serialNumber": "serial",
+      "name": "Transaction name",
+      "nameAr": "Name of the deal in Arabic",
+      "nameEn": "English name of the transaction",
+      "phone": "mobile number",
+      "email": "Email",
+      "joiningDate": "Creation date",
+      "area": "area",
+      "city": "city",
+      "verified": "verified",
+      "active": "purchase status",
+      "actions": "control",
+      "indivdual": "buyer's name",
+      "status": "status",
+      "all": "all"
+    },
     "Users": {
       "serialNumber": "Serial",
       "name": "User",
@@ -503,9 +506,9 @@
     "notPublished": "Not Published",
     "buy": "purchased",
     "notBuy": "Not purchased",
-    "in_cart" : "In a customer basket",
-    "all": "All" ,
-    "add": "Increase", 
+    "in_cart": "In a customer basket",
+    "all": "All",
+    "add": "Increase",
     "miuns": "Decrease"
   },
 
@@ -741,8 +744,10 @@
     "image": "Image",
     "status": "Status",
     "products": "Products",
+    "providerName": "Provider Name",
     "provider": "provider",
-    "Administration":"Administration",
+    "companyName": "Company Name",
+    "Administration": "Administration",
     "productImage": "Product Image",
     "sub_section_name": "Sub Section Name",
     "sub_section": "sub section",
@@ -832,7 +837,7 @@
     "contentEn": "English Content",
     "taxPercentage": "Tax Percentage (%)",
     "discountPercentage": "Discount Percentage (%)",
-    "Quantity" : "Quantity" ,
+    "Quantity": "Quantity",
     "deliveryPrice": "Delivery Price",
     "driverDailyOrdersAmount": "Driver Daily Orders Amount",
     "appointmentOrdersAmount": "Appointment Orders Amount",
@@ -1093,13 +1098,13 @@
     "edit_vehicle": "Edit Vehicle Data",
 
     "new_requests_count": "New Orders Count",
-    "provider_total" : "Number of Providers",
+    "provider_total": "Number of Providers",
     "incomplete_requests_count": "Incomplete Orders Count",
     "completed_requests_count": "Completed Orders Count",
     "canceled_requests_count": "Canceled Orders Count",
     "ongoing_requests_count": "Ongoing Orders Count",
     "rejected_requests_count": "Rejected Orders Count",
-   "total requests": "The total number of requests in the system.",
+    "total requests": "The total number of requests in the system.",
     "number_of_accepted_orders": "Number Of Accepted Orders",
     "discount_percentage_on_booking": "Discount Percentage %",
     "contact_service_admin": "Contact Service admin",
@@ -1191,8 +1196,8 @@
     "view_property_section": "View Property Section",
     "neighborhood_name": "Neighborhood Name",
     "package_golden_incart": "How long the golden deal will remain in the customer's cart",
-     "package_notifation": "the time between notifications sent to confirm the order",
-     "present": "application commission percentage",
+    "package_notifation": "the time between notifications sent to confirm the order",
+    "present": "application commission percentage",
     "number_of_reports_to_block_auto_ad": "Number of Reports to Block Auto Ad",
     "number_of_free_package_ads": "Number of Free Package Ads",
     "free_package_expiry_duration": "Free Package Expiry Duration in (Days)",
@@ -1269,7 +1274,7 @@
     "current_balance": "Current Balance of Ads",
 
     "bank_accounts_settings": "Bank Accounts Settings",
-    "delivery_price" : "Delivery price settings",
+    "delivery_price": "Delivery price settings",
     "show_advertiser_image_logo": "Show Advertiser Image/Logo"
   },
 
@@ -1325,14 +1330,14 @@
     "commericalProfile": "You Must Select commerical Profile Image",
     "taxProfile": "You Must Select tax Profile Image",
     "free_package_ads_field_required": "Field Number of Free Package Ads is required",
-    "free_package_duration_field_required": "Field Free Package Duration is required" ,
-    "type_news": "You must select to kind the news" ,
+    "free_package_duration_field_required": "Field Free Package Duration is required",
+    "type_news": "You must select to kind the news",
     "maim_category": "You must select the main category",
-     "sub_category": "You must select a subcategory",
-     "product": "You must select the product" ,
-     "des_ar": "The transaction description field in Arabic cannot be empty",
-     "des_en": "The deal description field in English cannot be empty" ,
-      "content_arabic_required": "Content Arabic Required",
+    "sub_category": "You must select a subcategory",
+    "product": "You must select the product",
+    "des_ar": "The transaction description field in Arabic cannot be empty",
+    "des_en": "The deal description field in English cannot be empty",
+    "content_arabic_required": "Content Arabic Required",
     "content_english_required": "Content English Required"
   },
 

@@ -173,7 +173,10 @@
         <!-- Start:: Actions -->
         <template v-slot:[`item.actions`]="{ item }">
           <div class="actions">
-            <a-tooltip placement="bottom" v-if="$can('banks show', 'banks')">
+            <a-tooltip
+              placement="bottom"
+              v-if="$can('products show', 'products')"
+            >
               <template slot="title">
                 <span>{{ $t("BUTTONS.show") }}</span>
               </template>
@@ -375,7 +378,7 @@ export default {
         },
         {
           text: this.$t("PLACEHOLDERS.price"),
-          value: "price_after_commission",
+          value: "price",
           sortable: false,
           align: "center",
         },
@@ -479,6 +482,8 @@ export default {
           method: "GET",
           url: "products",
           params: {
+            // owner:localStorage.getItem("Provider_admin_dashboard_user_id"),
+            mine: 1,
             page: this.paginations.current_page,
             name: this.filterOptions.title,
             isActive: this.filterOptions.is_active?.value,

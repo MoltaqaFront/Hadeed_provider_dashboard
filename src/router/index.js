@@ -148,6 +148,11 @@ import VueRouter from "vue-router";
 import auth from "../middleware/auth.js";
 import subCategoryHome from "../views/Cruds/SubCategory/Home.vue";
 
+// start:: Provider Data updates
+import ProviderDataHome from "../views/Cruds/ProvidersData/Home.vue";
+import ProvidersData from "../views/Cruds/ProvidersData/ProvidersData.vue";
+// end:: Provider Data  updates
+
 // ============== Start:: Financial Reports Routes
 
 // ============== End:: Financial Reports Routes
@@ -398,6 +403,68 @@ const routes = [
             path: "all",
             name: "AllMeasure",
             component: AllMeasure,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "measure index",
+                subject: "measure",
+              },
+            },
+          },
+          {
+            path: "create",
+            name: "CreateMeasure",
+            component: CreateMeasure,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "measure create",
+                subject: "measure",
+              },
+            },
+          },
+          {
+            path: "edit/:id",
+            name: "EditMeasure",
+            component: EditMeasure,
+            props: true,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "measure edit",
+                subject: "measure",
+              },
+            },
+          },
+          {
+            path: "show/:id",
+            name: "ShowMeasure",
+            component: ShowMeasure,
+            props: true,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "measure show",
+                subject: "measure",
+              },
+            },
+          },
+        ],
+      },
+      // End:: Measure  Config
+      // Start:: Provider update  Config
+      {
+        path: "/provider",
+        name: "profileUpdateHome",
+        component: ProviderDataHome,
+        meta: {
+          middleware: [auth],
+        },
+        children: [
+          {
+            path: "profile-update",
+            name: "profileUpdateData",
+            component: ProvidersData,
             meta: {
               middleware: [auth],
               requiresPermission: {
