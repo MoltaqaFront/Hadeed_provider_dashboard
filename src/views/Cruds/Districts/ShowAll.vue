@@ -133,7 +133,7 @@
         </template>
         <!-- End:: Item Image -->
         <!-- start city names -->
-        <template v-slot:[`item.city.name`]="{ item, index }">
+        <template v-slot:[`item.city.name`]="{ item }">
           <div class="table_image_wrapper">
             <h6 class="text-danger" v-if="!item.id">
               {{ $t("TABLES.noData") }}
@@ -145,7 +145,7 @@
         </template>
         <!-- end city names -->
         <!-- start reggion names -->
-        <template v-slot:[`item.city.region.name`]="{ item, index }">
+        <template v-slot:[`item.city.region.name`]="{ item }">
           <div class="table_image_wrapper">
             <h6 class="text-danger" v-if="!item.id">
               {{ $t("TABLES.noData") }}

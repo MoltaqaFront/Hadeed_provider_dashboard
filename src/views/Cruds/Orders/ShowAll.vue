@@ -157,13 +157,18 @@
 
                 <div class="filter_form_wrapper w-100">
                   <form class="w-100">
-                    <base-select-input col="12" :optionsList="activeStatuses" :placeholder="$t('PLACEHOLDERS.status')"
+                    <base-select-input col="12" :optionsList="orderTypes" :placeholder="$t('PLACEHOLDERS.status')"
                       v-model="status_modal" />
 
-                    <div class="form-group" v-if="(status_modal && status_modal.key === 'rejected')">
+                    <div class="form-group" v-if="(status_modal && status_modal.value === 'rejected')">
                       <base-input col="12" rows="3" type="textarea" :placeholder="$t('PLACEHOLDERS.reason')"
                         v-model="reason" required />
                     </div>
+                     <div class="form-group" v-if="(status_modal && status_modal.value === 'accepted')">
+                        <base-input col="12" rows="3" type="date" :placeholder="$t('TABLES.Orders.delivered_date')"
+                          v-model="date_time" required />
+                        <input type="file" @change="handleFileUpload" />
+                      </div>
 
                   </form>
                 </div>
@@ -311,6 +316,7 @@
 <script>
 import VueHtml2pdf from 'vue-html2pdf';
 import { mapGetters } from "vuex";
+import moment from 'moment';
 
 export default {
   name: "AllOrders",
@@ -339,22 +345,27 @@ export default {
       ];
     },
 
-    orderTypes() {
+   orderTypes() {
       return [
         {
           id: 1,
-          name: this.$t("PLACEHOLDERS.typeProduct"),
-          value: "delivery",
+          name: this.$t("ORDERS.accepted"),
+          value: "accepted",
         },
         {
           id: 2,
-          name: this.$t("PLACEHOLDERS.typeService"),
-          value: "pickup",
+          name: this.$t("ORDERS.rejected"),
+          value: "rejected",
         },
         {
-          id: null,
-          name: this.$t("STATUS.all"),
-          value: null,
+          id: 3,
+          name: this.$t("ORDERS.on_the_way"),
+          value: "on_the_way",
+        },
+        {
+          id: 4,
+          name: this.$t("ORDERS.delivered"),
+          value: "delivered",
         },
       ];
     },
@@ -501,6 +512,8 @@ export default {
     
       status_modal: null,
       reason: '',
+      file: null,
+      date_time: null,
       serialNumber: null,
       invoice_issue_date: null,
       provider_name: null,
@@ -638,26 +651,12 @@ export default {
     },
 
     // End:: Handling Download Files
-
-    // async getAllStatus() {
-    //   this.loading = true;
-    //   try {
-    //     let res = await this.$axios({
-    //       method: "GET",
-    //       url: "orders",
-    //     });
-    //     this.allStatus = res.data.data;
-    //     this.allStatus = res.data.data.OrderStatuses.map((name, index) => ({ id: index, name: name.translated_key, key: name.key }));
-    //     console.log(this.allStatus)
-    //   } catch (error) {
-    //     this.loading = false;
-    //     console.log(error.response.data.message);
-    //   }
-    // },
     // ==================== End:: Crud ====================
 
     // ===== Start:: Update
-
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+    },
     selectUpdateItem(item) {
       this.dialogUpdate = true;
       this.itemToUpdate = item;
@@ -667,17 +666,37 @@ export default {
     async confirmChangeStatus() {
       try {
 
-        const requestData = {
-          status: this.status_modal.key
-        };
+        const requestData = new FormData();
 
-        if (this.reason.trim() !== '') {
-          requestData.rejection_reason = this.reason.trim();
+         const formattedDate = moment(this.date_time.trim()).format('YYYY/MM/DD HH:mm:ss');
+
+        requestData.append("delivery_date", formattedDate)
+        requestData.append("status", this.status_modal.value)
+          requestData.append("invoice", this.file)
+
+        if (this.reason) {
+          requestData.append("rejection_reason", this.reason)
+
         }
+
+        // const requestData = {
+        //   status: this.status_modal.value
+        // };
+
+        // if (this.reason.trim() !== '') {
+        //   requestData.rejection_reason = this.reason.trim();
+        // };
+        // if (this.date_time) {
+        //  
+        // };
+        // if (this.file) {
+        //   requestData.invoice = this.file.trim();
+        // };
+        
         await this.$axios({
           method: "POST",
-          url: `orders/accept-reject/${this.itemToUpdate.id}`,
-          data: requestData // Put the data in the 'data' property
+          url: `orders/change-order-status/${this.itemToUpdate.id}`,
+          data: requestData 
         });
 
         this.dialogUpdate = false;

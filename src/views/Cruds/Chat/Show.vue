@@ -90,45 +90,12 @@ export default {
 
 
   mounted() {
-
-    // if private and dot before listen is required .new_chat
-    // Echo.private(`chat.${this.getAuthenticatedUserData.id}`)
-    //   .listen('.new_chat', (data) => {
-    //     console.log("ell", data);
-    //     this.messages.push(data.message);
-    //   });
-    Echo.channel(`chat.${this.$route.params.id}`)
+    Echo.channel(`chat/${this.$route.params.id}`)
       .listen('.new_chat', (data) => {
         console.log("ell", data);
         this.messages.push(data.message);
       });
   },
-
-  async created() {
-
-    this.GetDataToShow();
-
-
-    this.$axios({
-      method: "POST",
-      url: `chat/chats/${this.$route.params.id}/update-in-chat`,
-      data: {
-        "in_chat": 1
-      }
-    });
-
-  },
-
-  beforeDestroy() {
-    this.$axios({
-      method: "POST",
-      url: `chat/chats/${this.$route.params.id}/update-in-chat`,
-      data: {
-        "in_chat": 0
-      }
-    });
-  },
-
 
   methods: {
 
@@ -141,8 +108,8 @@ export default {
       const REQUEST_DATA = new FormData();
 
       // Start:: Append Request Data
-      REQUEST_DATA.append("to_type", "user");
-      REQUEST_DATA.append("to_id", this.data.receiver_id);
+      REQUEST_DATA.append("to_type", "admin");
+      // REQUEST_DATA.append("to_id", this.data.receiver_id);
       // REQUEST_DATA.append("isSenderMe", true);
 
       if (this.newMessage) {
@@ -154,21 +121,9 @@ export default {
       try {
         await this.$axios({
           method: "POST",
-          url: `chat/chats/${this.$route.params.id}/send-message`,
+          url: `chats/${this.$route.params.id}`,
           data: REQUEST_DATA,
         });
-
-
-        // this.messages.push({
-        //   from_id: this.getAuthenticatedUserData.id,
-        //   from_type: "provider",
-        //   id: this.$route.params.id,
-        //   message_text: this.newMessage,
-        //   readed_at: new Date(),
-        //   to_id: this.data.receiver_id,
-        //   to_type: "client"
-        // })
-
         this.newMessage = '';
         // this.selectedFile = '';
         this.isWaitingRequest = false;
@@ -186,15 +141,12 @@ export default {
       try {
         let res = await this.$axios({
           method: "POST",
-          url: `chat/chats/show-chat`,
-          params: {
-            chat_id: `${this.$route.params.id}`
-          }
+          url: `chats/${this.$route.params.id}`,
         });
 
-        this.messages = res.data.data.messages;
-        this.data.receiver_id = res.data.data.user_id;
-        this.data.provider_id = res.data.data.provider_id;
+        this.newMessage = res.data.data.last_message.message_text;
+        // this.data.receiver_id = res.data.data.last_message.to_id;
+        // this.data.provider_id = res.data.data.order_id;
 
         // console.log(res.data.data.messages);
       } catch (error) {
@@ -214,6 +166,9 @@ export default {
     },
 
 
+  },
+    created() {
+    this.GetDataToShow();
   },
 };
 </script>
