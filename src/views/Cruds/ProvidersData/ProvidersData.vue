@@ -5,11 +5,16 @@
       <h4>{{ $t("SIDENAV.Provider.data") }}</h4>
     </div>
     <!-- End:: Title -->
-
     <!-- Start:: Single Step Form Content -->
     <div class="single_step_form_content_wrapper">
       <form @submit.prevent="validateFormInputs">
         <div class="row">
+          <div class="name_wrapper">
+            <h4>
+              {{ $t("PLACEHOLDERS.providerName") }}
+              {{ getAuthenticatedUserData.name }}
+            </h4>
+          </div>
           <!--satrt:: personal image -->
           <v-row class="justify-center">
             <base-image-upload-input
@@ -22,15 +27,6 @@
             />
           </v-row>
           <!-- end::personal image -->
-          <!-- Start:: Name Input -->
-          <base-input
-            col="6"
-            type="text"
-            :placeholder="$t('PLACEHOLDERS.providerName')"
-            v-model.trim="data.providerName"
-            required
-          />
-          <!-- End:: Name Input -->
 
           <!-- start email -->
           <base-input
@@ -206,6 +202,7 @@ export default {
   computed: {
     ...mapGetters({
       getAppLocale: "AppLangModule/getAppLocale",
+      getAuthenticatedUserData: "AuthenticationModule/getAuthenticatedUserData",
     }),
     typeStatuses() {
       return [
@@ -230,18 +227,12 @@ export default {
       if (!this.data.companyName) {
         this.isWaitingRequest = false;
         this.$message.error(this.$t("VALIDATION.name"));
-      } else if (!this.data.email) {
+      } else if (!this.data.companyName) {
         this.isWaitingRequest = false;
-        this.$message.error(this.$t("VALIDATION.email"));
-      } else if (!this.data.password) {
+        this.$message.error(this.$t("VALIDATION.companyName"));
+      } else if (!this.data.companyName) {
         this.isWaitingRequest = false;
-        this.$message.error(this.$t("VALIDATION.password"));
-      } else if (!this.data.confirm_password) {
-        this.isWaitingRequest = false;
-        this.$message.error(this.$t("VALIDATION.password"));
-      } else if (!this.data.clientType) {
-        this.isWaitingRequest = false;
-        this.$message.error(this.$t("VALIDATION.clientType"));
+        this.$message.error(this.$t("VALIDATION.companyName"));
       } else {
         this.submitForm();
         return;
@@ -271,12 +262,13 @@ export default {
 
       REQUEST_DATA.append("company_name", this.data.companyName);
       REQUEST_DATA.append("email", this.data.email);
+      REQUEST_DATA.append("lat", this.Latitude);
+      REQUEST_DATA.append("lng", this.Longitude);
 
       REQUEST_DATA.append("mobile", this.data.phone);
-      REQUEST_DATA.append("password", this.data.password);
       REQUEST_DATA.append("confirm_password", this.data.confirm_password);
       REQUEST_DATA.append("tax_number", this.data.tax_number);
-      REQUEST_DATA.append("type", this.data.clientType.value);
+      // REQUEST_DATA.append("type", this.data.clientType.value);
       REQUEST_DATA.append("city_id", this.data.area_id?.id);
       REQUEST_DATA.append("region_id", this.data.country_id?.id);
       REQUEST_DATA.append("is_active", +this.data.active);

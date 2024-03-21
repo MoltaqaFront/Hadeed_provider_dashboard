@@ -1283,6 +1283,7 @@
     "loginFailed": "Wrong Login Data",
     "name": "Name Field Cant Be Empty",
     "email": "Email Field Cant Be Empty",
+    "companyName": "Company Name",
     "email_domain": "The e-mail should contain .com/.net",
     "missingAtSymbol": "missingAtSymbol",
     "password": "Password Field Cant Be Empty",
