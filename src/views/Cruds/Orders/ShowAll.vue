@@ -672,8 +672,7 @@ export default {
 
         requestData.append("delivery_date", formattedDate)
         requestData.append("status", this.status_modal.value)
-          requestData.append("invoice", this.file)
-
+        requestData.append("invoice", this.file)
         if (this.reason) {
           requestData.append("rejection_reason", this.reason)
 
