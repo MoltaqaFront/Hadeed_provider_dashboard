@@ -87,8 +87,8 @@
           </button>
         </div>
 
-        <div class="title_route_wrapper" v-if="$can('admins create', 'admins')">
-          <router-link to="/admins/create">
+        <div class="title_route_wrapper" v-if="$can('provider_admins create', 'provider_admins')">
+          <router-link to="/providers/create">
             {{ $t("BUTTONS.addAdmin") }}
           </router-link>
         </div>
@@ -182,7 +182,7 @@
         <!-- Start:: Actions -->
         <template v-slot:[`item.actions`]="{ item }">
           <div class="actions">
-            <a-tooltip placement="bottom" v-if="$can('admins show', 'admins')">
+            <a-tooltip placement="bottom" v-if="$can('provider_admins show', 'provider_admins')">
               <template slot="title">
                 <span>{{ $t("BUTTONS.show") }}</span>
               </template>
@@ -193,7 +193,7 @@
 
             <a-tooltip
               placement="bottom"
-              v-if="$can('admins edit', 'admins') && item.id !== 1"
+              v-if="$can('provider_admins edit', 'provider_admins') "
             >
               <template slot="title">
                 <span>{{ $t("BUTTONS.edit") }}</span>
@@ -202,10 +202,9 @@
                 <i class="fal fa-edit"></i>
               </button>
             </a-tooltip>
-
             <a-tooltip
               placement="bottom"
-              v-if="$can('admins delete', 'admins') && item.id !== 1"
+              v-if="$can('provider_admins delete', 'provider_admins') "
             >
               <template slot="title">
                 <span>{{ $t("BUTTONS.delete") }}</span>
@@ -215,7 +214,7 @@
               </button>
             </a-tooltip>
 
-            <template v-if="$can('admins activate', 'admins') && item.id !== 1">
+            <template v-if="$can('provider_admins activate', 'provider_admins') ">
               <a-tooltip placement="bottom" v-if="!item.is_active">
                 <template slot="title">
                   <span>{{ $t("BUTTONS.activate") }}</span>
@@ -381,11 +380,6 @@ export default {
           name: this.$t("STATUS.notActive"),
           value: 0,
         },
-        {
-          id: null,
-          name: this.$t("STATUS.all"),
-          value: null,
-        },
       ];
     },
   },
@@ -412,7 +406,7 @@ export default {
       tableHeaders: [
         {
           text: this.$t("TABLES.Admins.serialNumber"),
-          value: "id",
+          value: "serialNumber",
           align: "center",
           width: "80",
           sortable: false,
@@ -428,6 +422,7 @@ export default {
           value: "name",
           align: "center",
           sortable: false,
+          width: "150"
         },
         {
           text: this.$t("TABLES.Admins.phone"),
@@ -446,6 +441,7 @@ export default {
           value: "created_at",
           align: "center",
           sortable: false,
+          width: "150"
         },
         {
           text: this.$t("PLACEHOLDERS.status"),
@@ -501,7 +497,7 @@ export default {
     // Start:: Handel Filter
     async submitFilterForm() {
       if (this.$route.query.page !== "1") {
-        await this.$router.push({ path: "/admins/all", query: { page: 1 } });
+        await this.$router.push({ path: "/providers/all", query: { page: 1 } });
       }
       this.setTableRows();
     },
@@ -511,7 +507,7 @@ export default {
       this.filterOptions.email = null;
       this.filterOptions.isActive = null;
       if (this.$route.query.page !== "1") {
-        await this.$router.push({ path: "/admins/all", query: { page: 1 } });
+        await this.$router.push({ path: "/providers/all", query: { page: 1 } });
       }
       this.setTableRows();
     },
@@ -546,6 +542,9 @@ export default {
         });
         this.loading = false;
         // console.log("All Data ==>", res.data.data);
+        res.data.data.forEach((item, index) => {
+          item.serialNumber = (this.paginations.current_page - 1) * this.paginations.items_per_page + index + 1;
+        });
         this.tableRows = res.data.data;
         this.paginations.last_page = res.data.meta.last_page;
         this.paginations.items_per_page = res.data.meta.per_page;
@@ -602,10 +601,10 @@ export default {
     // ==================== Start:: Crud ====================
     // ===== Start:: End
     editItem(item) {
-      this.$router.push({ path: `/admins/edit/${item.id}` });
+      this.$router.push({ path: `/providers/edit/${item.id}` });
     },
     showItem(item) {
-      this.$router.push({ path: `/admins/show/${item.id}` });
+      this.$router.push({ path: `/providers/show/${item.id}` });
     },
     // ===== End:: End
 

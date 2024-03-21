@@ -6,7 +6,7 @@ export default {
     try {
       let res = await axios({
         method: "GET",
-        url: `roles?forSystem=1`,
+        url: `roles`,
       });
       // console.log("ROLES =>", res.data.body.roles_and_permissions);
       context.commit(

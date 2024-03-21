@@ -11,67 +11,32 @@
       <form @submit.prevent="validateFormInputs">
         <div class="row">
           <!-- Start:: Image Upload Input -->
-          <base-image-upload-input
-            col="12"
-            identifier="admin_image"
-            :preSelectedImage="data.image.path"
-            :placeholder="$t('PLACEHOLDERS.personalImage')"
-            @selectImage="selectImage"
-            required
-          />
+          <base-image-upload-input col="12" identifier="admin_image" :preSelectedImage="data.image.path"
+            :placeholder="$t('PLACEHOLDERS.personalImage')" @selectImage="selectImage" required />
           <!-- End:: Image Upload Input -->
 
           <!-- Start:: Name Input -->
-          <base-input
-            col="6"
-            type="text"
-            :placeholder="$t('PLACEHOLDERS.name')"
-            v-model.trim="data.name"
-            required
-          />
+          <base-input col="6" type="text" :placeholder="$t('PLACEHOLDERS.name')" v-model.trim="data.name" required />
           <!-- End:: Name Input -->
 
           <!-- Start:: Email Input -->
-          <base-input
-            col="6"
-            type="email"
-            :placeholder="$t('PLACEHOLDERS.email')"
-            v-model.trim="data.email"
-            required
-          />
+          <base-input col="6" type="email" :placeholder="$t('PLACEHOLDERS.email')" v-model.trim="data.email" required />
           <!-- End:: Email Input -->
 
           <!-- Start:: Phone Input -->
-          <base-input
-            col="6"
-            type="tel"
-            :placeholder="$t('PLACEHOLDERS.phone')"
-            v-model.trim="data.phone"
-            required
-          />
+          <base-input col="6" type="tel" :placeholder="$t('PLACEHOLDERS.phone')" v-model.trim="data.phone" required />
           <!-- End:: Phone Input -->
 
           <!-- Start:: Roles Input -->
-          <base-select-input
-            v-if="allRoles"
-            col="6"
-            :optionsList="allRoles"
-            :placeholder="$t('PLACEHOLDERS.role')"
-            v-model="data.role"
-            required
-          />
+          <base-select-input v-if="allRoles" col="6" :optionsList="allRoles" :placeholder="$t('PLACEHOLDERS.role')"
+            v-model.trim="data.role" required />
 
-          <!-- {{ data.role }} -->
           <!-- End:: Roles Input -->
 
           <!-- Start:: Activate Edit Password Switch Input -->
           <div class="input_wrapper switch_wrapper my-5">
-            <v-switch
-              color="green"
-              :label="$t('PLACEHOLDERS.editPassword')"
-              v-model="data.enableEditPassword"
-              hide-details
-            ></v-switch>
+            <v-switch color="green" :label="$t('PLACEHOLDERS.editPassword')" v-model="data.enableEditPassword"
+              hide-details></v-switch>
           </div>
           <!-- End:: Activate Edit Password Switch Input -->
 
@@ -79,23 +44,13 @@
             <div class="col-12" v-if="data.enableEditPassword">
               <div class="row">
                 <!-- Start:: Password Input -->
-                <base-input
-                  col="6"
-                  type="password"
-                  :placeholder="$t('PLACEHOLDERS.password')"
-                  v-model.trim="data.password"
-                  required
-                />
+                <base-input col="6" type="password" :placeholder="$t('PLACEHOLDERS.password')"
+                  v-model.trim="data.password" required />
                 <!-- End:: Password Input -->
 
                 <!-- Start:: Confirm Password Input -->
-                <base-input
-                  col="6"
-                  type="password"
-                  :placeholder="$t('PLACEHOLDERS.confirmPassword')"
-                  v-model.trim="data.passwordConfirmation"
-                  required
-                />
+                <base-input col="6" type="password" :placeholder="$t('PLACEHOLDERS.confirmPassword')"
+                  v-model.trim="data.passwordConfirmation" required />
                 <!-- End:: Confirm Password Input -->
               </div>
             </div>
@@ -103,28 +58,15 @@
 
           <!-- Start:: Deactivate Switch Input -->
           <div class="input_wrapper switch_wrapper my-5">
-            <v-switch
-              color="green"
-              :label="
-                data.active
-                  ? $t('PLACEHOLDERS.active')
-                  : $t('PLACEHOLDERS.notActive')
-              "
-              v-model="data.active"
-              hide-details
-            ></v-switch>
+            <v-switch color="green" :label="data.active ? $t('PLACEHOLDERS.active') : $t('PLACEHOLDERS.notActive')"
+              v-model="data.active" hide-details></v-switch>
           </div>
           <!-- End:: Deactivate Switch Input -->
 
           <!-- Start:: Submit Button Wrapper -->
           <div class="btn_wrapper">
-            <base-button
-              class="mt-2"
-              styleType="primary_btn"
-              :btnText="$t('BUTTONS.save')"
-              :isLoading="isWaitingRequest"
-              :disabled="isWaitingRequest"
-            />
+            <base-button class="mt-2" styleType="primary_btn" :btnText="$t('BUTTONS.save')" :isLoading="isWaitingRequest"
+              :disabled="isWaitingRequest" />
           </div>
           <!-- End:: Submit Button Wrapper -->
         </div>
@@ -200,11 +142,11 @@ export default {
         this.data.name = res.data.data.Admin.name;
         this.data.email = res.data.data.Admin.email;
         this.data.phone = res.data.data.Admin.mobile;
-        this.data.role = res.data.data.Admin.roles.map((item) => ({
-          name: item,
-        }));
+        this.data.role = res.data.data.Admin.roles;
         this.data.active = res.data.data.Admin.is_active;
         // End:: Set Data
+        //console.log(this.data.role);
+
       } catch (error) {
         console.log(error.response.data.message);
       }
@@ -258,7 +200,10 @@ export default {
           this.isWaitingRequest = false;
           this.$message.error(this.$t("VALIDATION.passwordLength"));
           return;
-        } else if (this.data.password != this.data.passwordConfirmation) {
+        } else if (
+          this.data.password !=
+          this.data.passwordConfirmation
+        ) {
           this.isWaitingRequest = false;
           this.$message.error(this.$t("VALIDATION.notEqualPasswords"));
           return;
@@ -285,10 +230,7 @@ export default {
       REQUEST_DATA.append("role_id", this.data.role.id);
       if (this.data.enableEditPassword) {
         REQUEST_DATA.append("password", this.data.password);
-        REQUEST_DATA.append(
-          "password_confirmation",
-          this.data.passwordConfirmation
-        );
+        REQUEST_DATA.append("password_confirmation", this.data.passwordConfirmation);
       }
       REQUEST_DATA.append("is_active", +this.data.active);
       REQUEST_DATA.append("_method", "PUT");
@@ -302,7 +244,7 @@ export default {
         });
         this.isWaitingRequest = false;
         this.$message.success(this.$t("MESSAGES.editedSuccessfully"));
-        this.$router.push({ path: "/admins/all" });
+        this.$router.push({ path: "/providers/all" });
       } catch (error) {
         this.isWaitingRequest = false;
         this.$message.error(error.response.data.message);

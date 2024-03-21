@@ -13,7 +13,6 @@
         <div class="filter_form_wrapper">
           <form @submit.prevent="submitFilterForm">
             <div class="row justify-content-center align-items-center w-100">
-
               <!-- Start:: Start Date Input -->
               <base-picker-input col="6" type="date" :placeholder="$t('PLACEHOLDERS.startDate')"
                 v-model.trim="filterOptions.from_date" />
@@ -42,7 +41,7 @@
       <!--  =========== Start:: Table Title =========== -->
       <div class="table_title_wrapper">
         <div class="title_text_wrapper">
-          <h5>{{ $t("PLACEHOLDERS.package_report") }}</h5>
+          <h5>{{ $t("PLACEHOLDERS.Overall_statistics") }}</h5>
           <button v-if="!filterFormIsActive" class="filter_toggler"
             @click.stop="filterFormIsActive = !filterFormIsActive">
             <i class="fal fa-search"></i>
@@ -65,70 +64,41 @@
       </div>
       <!--  =========== End:: Table Title =========== -->
 
-      <!--  =========== Start:: Data Table =========== -->
-      <v-data-table class="thumb" :loading="loading" :loading-text="$t('TABLES.loadingData')" :search="searchValue"
-        :headers="tableHeaders" :items="tableRows" item-class="ltr" :items-per-page="paginations.items_per_page"
-        hide-default-footer>
-        <!-- Start:: No Data State -->
-        <template v-slot:no-data>
-          {{ $t("TABLES.noData") }}
-        </template>
-        <!-- Start:: No Data State -->
+      <!-- ==== Start:: Client Addresses ==== -->
+      <div class="table_content">
+        <v-simple-table class="stat-table">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-center">
+                  {{ $t("TABLES.FinancialReports.totalServicesEnded") }}
+                </th>
+                <th class="text-center">
+                  {{ $t("TABLES.FinancialReports.totalProductsInProcessing") }}
+                </th>
 
-        <template v-slot:[`item.id`]="{ item, index }">
-          <div class="table_image_wrapper">
-            <h6 class="text-danger" v-if="!item.id"> {{ $t("TABLES.noData") }} </h6>
-            <p v-else>{{ (paginations.current_page - 1) * paginations.items_per_page + index + 1 }}</p>
-          </div>
-        </template>
-
-        <template v-slot:[`item.not_finished_orders`]="{ item }">
-          <router-link :to="`/orders/all`">
-            {{ item.not_finished_orders }}
-          </router-link>
-        </template>
-        <template v-slot:[`item.finished_orders`]="{ item }">
-            <router-link :to="`/orders/all`">
-              {{ item.finished_orders }}
-            </router-link>
+              </tr>
+            </thead>
+            <tbody>
+              <template>
+                <tr class="text-center all-stat">
+                  <td>
+                    <router-link :to="`/orders/all`">
+                      {{ statistic.finished_orders }}
+                    </router-link>
+                  </td>
+                 <td>
+                      <router-link :to="`/orders/all`">
+                        {{ statistic.not_finished_orders }}
+                      </router-link>
+                    </td>
+                </tr>
+              </template>
+            </tbody>
           </template>
-
-        <!-- ======================== Start:: Dialogs ======================== -->
-        <template v-slot:top>
-          <!-- Start:: pdf Modal -->
-          <v-dialog v-model="dialogPdf">
-            <v-card>
-              <button class="ex-btn-s" @click="clickedDownload"> {{ $t("PLACEHOLDERS.export_pdf") }}</button>
-
-              <v-card-actions>
-                <v-btn class="modal_cancel_btn" @click="dialogPdf = false">{{ $t("BUTTONS.cancel") }}</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <!-- End:: pdf Modal -->
-
-          <!-- Start:: excel Modal -->
-          <v-dialog v-model="dialogExcel">
-            <v-card>
-              <a class="ex-btn-s" :href="excel" download>
-                {{ $t("PLACEHOLDERS.export_excel") }}
-              </a>
-              <v-card-actions>
-                <v-btn class="modal_cancel_btn" @click="dialogExcel = false">{{ $t("BUTTONS.cancel") }}</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <!-- End:: excel Modal -->
-
-
-        </template>
-        <!-- ======================== End:: Dialogs ======================== -->
-
-      </v-data-table>
-      <!--  =========== End:: Data Table =========== -->
-   
+        </v-simple-table>
+      </div>
+      <!-- ==== End:: Client Addresses ==== -->
     </main>
     <!-- End:: Main Section -->
 
@@ -164,10 +134,8 @@ export default {
   data() {
     return {
       statistic: {
-        total_orders: null,
-        provider_earning: null,
-        system_earning: null,
-        total_vat: null,
+        finished_orders: null,
+        not_finished_orders: null,
       },
 
       // Start:: Loading Data
@@ -180,8 +148,6 @@ export default {
       // Start:: Filter Data
       filterFormIsActive: false,
       filterOptions: {
-        provider_name: null,
-        driverPhone: null,
         from_date: null,
         to_date: null
       },
@@ -199,14 +165,38 @@ export default {
           sortable: false,
         },
         {
-          text: this.$t("TABLES.FinancialReports.totalProductsInProcessing"),
-          value: "not_finished_orders",
+          text: this.$t("TABLES.FinancialReports.name"),
+          value: "name",
           sortable: false,
           align: "center",
         },
         {
-          text: this.$t("TABLES.FinancialReports.totalServicesEnded"),
-          value: "finished_orders",
+          text: this.$t("TABLES.FinancialReports.providerPhone"),
+          value: "mobile",
+          sortable: false,
+          align: "center",
+        },
+        {
+          text: this.$t("TABLES.FinancialReports.totalProductsInProcessing"),
+          value: "total_orders",
+          sortable: false,
+          align: "center",
+        },
+        {
+          text: this.$t("TABLES.FinancialReports.profit_provider"),
+          value: "provider_earning",
+          sortable: false,
+          align: "center",
+        },
+        {
+          text: this.$t("TABLES.FinancialReports.totalapp"),
+          value: "system_earning",
+          sortable: false,
+          align: "center",
+        },
+        {
+          text: this.$t("TABLES.FinancialReports.total_salaey"),
+          value: "total_vat",
           sortable: false,
           align: "center",
         },
@@ -253,7 +243,7 @@ export default {
     // Start:: Handel Filter
     async submitFilterForm() {
       if (this.$route.query.page !== '1') {
-        await this.$router.push({ path: '/financial-reports/all', query: { page: 1 } });
+        await this.$router.push({ path: '/financial-not-finshed-reports/all', query: { page: 1 } });
       }
       this.setTableRows();
     },
@@ -261,7 +251,7 @@ export default {
       this.filterOptions.from_date = null;
       this.filterOptions.to_date = null;
       if (this.$route.query.page !== '1') {
-        await this.$router.push({ path: '/financial-reports/all', query: { page: 1 } });
+        await this.$router.push({ path: '/financial-not-finshed-reports/all', query: { page: 1 } });
       }
       this.setTableRows();
     },
@@ -294,7 +284,9 @@ export default {
         });
         this.loading = false;
         // console.log("All Data ==>", res.data.data);
+        this.loading = false;
         this.tableRows = res.data.data.Financials;
+        this.statistic = res.data.data.Financials;
         this.paginations.last_page = res.data.pagination.lastPageNumber;
         this.paginations.items_per_page = res.data.pagination.pageCount;
       } catch (error) {
@@ -342,9 +334,9 @@ export default {
       try {
         let res = await this.$axios({
           method: "GET",
-          url: `financials/export-pdf`,
+          url: `financials/export-pdf?type=finished`,
         });
-        this.pdf = res.data.data;
+        this.pdf = res.data.data.pdf;
         // this.dialogPdf = false;
       } catch (error) {
         this.dialogPdf = false;

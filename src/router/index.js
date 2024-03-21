@@ -46,6 +46,7 @@ import CartsHome from "../views/Cruds/Carts/Home.vue";
 import CategoryHome from "../views/Cruds/Category/Home.vue";
 import ChangePhoneNumberForm from "../views/Auth/ChangePhoneNumber.vue";
 import CharacteristicsHome from "../views/Cruds/Characteristics/Home.vue";
+import ChatHome from "../views/Cruds/Chat/Home.vue";
 import CitiesHome from "../views/Cruds/Cities/Home.vue";
 import ClientsHome from "../views/Cruds/Clients/Home.vue";
 import ContactMessagesHome from "../views/Cruds/ContactMessages/Home.vue";
@@ -125,6 +126,7 @@ import ShowBanks from "../views/Cruds/Banks/Show.vue";
 import ShowCarts from "../views/Cruds/Carts/Show.vue";
 import ShowCategory from "../views/Cruds/Category/Show.vue";
 import ShowCharacteristics from "../views/Cruds/Characteristics/Show.vue";
+import ShowChat from "../views/Cruds/Chat/Show.vue";
 import ShowCities from "../views/Cruds/Cities/Show.vue";
 import ShowClient from "../views/Cruds/Clients/Show.vue";
 import ShowCountries from "../views/Cruds/Countries/Show.vue";
@@ -717,8 +719,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "orders index",
-                subject: "orders",
+                action: "order_items index",
+                subject: "order_items",
               },
             },
           },
@@ -730,8 +732,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "orders create",
-                subject: "offers",
+                action: "order_items create",
+                subject: "order_items",
               },
             },
           },
@@ -742,8 +744,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "orders show",
-                subject: "orders",
+                action: "order_items show",
+                subject: "order_items",
               },
             },
           },
@@ -1482,6 +1484,32 @@ const routes = [
       },
       // End:: news_tapes Config
 
+      // Start:: Chat Routes Config
+      {
+        path: "/chat",
+        name: "ChatHome",
+        component: ChatHome,
+        meta: {
+          middleware: [auth],
+        },
+        children: [
+          {
+            path: "show/:id",
+            name: "ShowChat",
+            component: ShowChat,
+            props: true,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "chats show",
+                subject: "chats",
+              },
+            },
+          },
+        ],
+      },
+      // End:: Chat Routes Config
+
       // Start:: golden-deals  Config
       {
         path: "/golden-deals",
@@ -1890,8 +1918,8 @@ const routes = [
         meta: {
           middleware: [auth],
           requiresPermission: {
-            action: "settings create",
-            subject: "settings",
+            action: "provider_contacts edit",
+            subject: "provider_contacts",
           },
         },
       },
@@ -2012,7 +2040,7 @@ const routes = [
 
       // Start:: Admins Routes Config
       {
-        path: "/admins",
+        path: "/providers",
         name: "AdminsHome",
         component: AdminsHome,
         meta: {
@@ -2026,8 +2054,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users index",
-                subject: "users",
+                action: "provider_admins index",
+                subject: "provider_admins",
               },
             },
           },
@@ -2038,8 +2066,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users create",
-                subject: "users",
+                action: "provider_admins create",
+                subject: "provider_admins",
               },
             },
           },
@@ -2051,8 +2079,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users edit",
-                subject: "users",
+                action: "provider_admins edit",
+                subject: "provider_admins",
               },
             },
           },
@@ -2064,8 +2092,8 @@ const routes = [
             meta: {
               middleware: [auth],
               requiresPermission: {
-                action: "users show",
-                subject: "users",
+                action: "provider_admins show",
+                subject: "provider_admins",
               },
             },
           },

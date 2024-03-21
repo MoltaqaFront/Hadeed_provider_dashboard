@@ -66,8 +66,6 @@ export default {
       data: {
         WhatsApp_contact: null,
         facebook_link: null,
-        snap_link: null,
-        insta_link: null,
 
       },
       // End:: Data Collection To Send
@@ -95,15 +93,15 @@ export default {
       try {
         let res = await this.$axios({
           method: "GET",
-          url: `static-pages?name=phones`,
+          url: `provider-contacts`,
         });
         // Start:: Set Data
 
         // Transform the API response
-        this.data.id = res.data.data[0].id;
-        this.phones = res.data.data[0].value.phones.map(phone => ({ phone: phone }));
+        this.data.id = res.data.data.ProviderContacts.id;
+        this.phones = res.data.data.ProviderContacts.phones.map(phone => ({ phone: phone }));
 
-        this.data.WhatsApp_contact = res.data.data[0].value.whatsapp;
+        this.data.WhatsApp_contact = res.data.data.ProviderContacts.whatsapp;
 
         // End:: Set Data
       } catch (error) {
@@ -118,8 +116,6 @@ export default {
 
       const REQUEST_DATA = new FormData();
       // Start:: Append Request Data
-      REQUEST_DATA.append("key", "phones");
-
       this.phones.forEach((element, index) => {
         REQUEST_DATA.append(`phones[${index}]`, element.phone);
       });
@@ -132,7 +128,7 @@ export default {
       try {
         await this.$axios({
           method: "POST",
-          url: `static-pages/${this.data.id}`,
+          url: `provider-contacts`,
           data: REQUEST_DATA,
         });
         this.isWaitingRequest = false;
