@@ -127,19 +127,19 @@
       <div
         class="home_route"
         @click="$emit('fireToggleNavDrawerEmit')"
-        v-if="$can('categories index', 'categories')"
+        v-if="$can('provider_wallets index', 'provider_wallets')"
       >
-        <router-link to="/category/all">
+        <router-link to="/wallets/balance">
           <span class="route_icon">
             <img
-              src="@/assets/media/icons/ui_icons/category.svg"
+              src="@/assets/media/icons/ui_icons/wallet.png"
               alt="icon"
               width="40"
               height="40"
             />
           </span>
           <span class="route_text">
-            {{ $t("PLACEHOLDERS.main_category") }}
+            {{ $t("PLACEHOLDERS.wallets") }}
           </span>
         </router-link>
       </div>

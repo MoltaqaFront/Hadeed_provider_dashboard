@@ -764,6 +764,7 @@
     "companyName": "اسم الشركة",
     "balance": "الرصيد",
     "amount": "المبلغ",
+    "wallets":"المحفظة",
     "account_settlement": "تصفية الحساب",
     "wallet_history": "تاريخ المحفظه",
     "transaction_name": "اسم الحركة",

@@ -12,15 +12,28 @@
           disabled
         />
         <!-- Start:: Submit Button Wrapper -->
-        <div class="btn_wrapper">
-          <base-button
-            class="mt-2"
-            styleType="primary_btn"
-            :btnText="$t('PLACEHOLDERS.account_settlement')"
-            style="font-size: 16px"
-            :isLoading="isWaitingRequest"
-            :disabled="isWaitingRequest"
-          />
+        <div class="d-flex">
+          <div class="btn_wrapper">
+            <base-button
+              class="mt-2"
+              styleType="primary_btn"
+              :btnText="$t('PLACEHOLDERS.account_settlement')"
+              style="font-size: 16px"
+              :isLoading="isWaitingRequest"
+              :disabled="isWaitingRequest"
+            />
+          </div>
+          <div class="btn_wrapper mx-5">
+            <v-btn
+              type="button"
+              @click="$router.push('/wallets/history')"
+              class="mt-2"
+              styleType="primary_btn"
+              style="font-size: 16px"
+            >
+              {{ $t("PLACEHOLDERS.wallet_history") }}
+            </v-btn>
+          </div>
         </div>
         <!-- End:: Submit Button Wrapper -->
       </form>
@@ -65,6 +78,9 @@ export default {
       } catch (error) {
         this.$message.error(error.response.data.message);
       }
+    },
+    test() {
+      alert(1);
     },
   },
   created() {

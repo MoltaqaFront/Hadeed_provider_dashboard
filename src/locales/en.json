@@ -756,6 +756,7 @@
     "provider": "provider",
     "balance": "Balance",
     "companyName": "Company Name",
+    "wallets": "Wallets",
     "amount": "Amount",
     "transaction_name": "Transaction Name",
     "wallet_history": "Wallet History",
