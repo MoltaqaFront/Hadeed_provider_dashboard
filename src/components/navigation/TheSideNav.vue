@@ -38,7 +38,25 @@
         </router-link>
       </div>
       <!-- End:: Home Route -->
-
+      <!-- start::product  Route -->
+      <div
+        class="home_route"
+        @click="$emit('fireToggleNavDrawerEmit')"
+        v-if="$can('products index', 'products')"
+      >
+        <router-link to="/Products/all">
+          <span class="route_icon">
+            <img
+              src="@/assets/media/icons/ui_icons/products.png"
+              alt="icon"
+              width="40"
+              height="40"
+            />
+          </span>
+          <span class="route_text"> {{ $t("SIDENAV.Products.title") }} </span>
+        </router-link>
+      </div>
+      <!-- end::product route -->
       <!-- Start:: notifications Route -->
       <!-- <div
         class="home_route"
@@ -192,7 +210,6 @@
       </div> -->
       <!-- End:: packages Route -->
 
-    
       <!-- Start:: carts Route -->
       <div
         class="home_route"
@@ -213,8 +230,6 @@
       </div>
       <!-- end:: carts Route -->
 
-
-    
       <!-- start:: orders route -->
       <div
         class="home_route"
@@ -234,49 +249,50 @@
             {{ $t("SIDENAV.Orders.title") }}
           </span>
         </router-link>
-      </div> 
+      </div>
       <!-- end::orders route -->
       <!-- Start financials -->
-      <div  class="home_route"
-               @click="$emit('fireToggleNavDrawerEmit')"
-               v-if="$can('financials index', 'financials')"
-             >
-              <router-link to="/financial-reports/all">
-                    <span class="route_icon">
-                      <img
-                        src="@/assets/media/icons/ui_icons/financial.png"
-                        alt="icon"
-                        width="40"
-                        height="40"
-                      />
-                    </span>
-                    <span class="route_text">
-                      {{ $t("PLACEHOLDERS.package_report") }}
-                    </span>
-                  </router-link>
+      <div
+        class="home_route"
+        @click="$emit('fireToggleNavDrawerEmit')"
+        v-if="$can('financials index', 'financials')"
+      >
+        <router-link to="/financial-reports/all">
+          <span class="route_icon">
+            <img
+              src="@/assets/media/icons/ui_icons/financial.png"
+              alt="icon"
+              width="40"
+              height="40"
+            />
+          </span>
+          <span class="route_text">
+            {{ $t("PLACEHOLDERS.package_report") }}
+          </span>
+        </router-link>
       </div>
       <!-- End financials-->
 
       <!-- Start:: contacts Route -->
-        <div
-            class="home_route"
-            @click="$emit('fireToggleNavDrawerEmit')"
-            v-if="$can('provider_contacts edit', 'provider_contacts')"
-          >
-            <router-link to="/contact_settings">
-              <span class="route_icon">
-                <img
-                  src="@/assets/media/icons/ui_icons/messages.svg"
-                  alt="icon"
-                  width="40"
-                  height="40"
-                />
-              </span>
-              <span class="route_text">
-                {{ $t("PLACEHOLDERS.contact_admins") }}
-              </span>
-            </router-link>
-        </div>
+      <div
+        class="home_route"
+        @click="$emit('fireToggleNavDrawerEmit')"
+        v-if="$can('provider_contacts edit', 'provider_contacts')"
+      >
+        <router-link to="/contact_settings">
+          <span class="route_icon">
+            <img
+              src="@/assets/media/icons/ui_icons/messages.svg"
+              alt="icon"
+              width="40"
+              height="40"
+            />
+          </span>
+          <span class="route_text">
+            {{ $t("PLACEHOLDERS.contact_admins") }}
+          </span>
+        </router-link>
+      </div>
       <!-- End:: contacts Route -->
 
       <!-- Start:: settings Route -->
@@ -301,12 +317,11 @@
       </div>
       <!-- End:: settings Route -->
 
-
       <!-- Start:: users Route -->
       <div
         class="home_route"
         @click="$emit('fireToggleNavDrawerEmit')"
-         v-if="$can('provider_admins index', 'provider_admins')"
+        v-if="$can('provider_admins index', 'provider_admins')"
       >
         <router-link to="/providers/all">
           <span class="route_icon">
@@ -436,7 +451,7 @@ export default {
       // Start:: Controle Open Tabs Data
       openKeys: [],
       // End:: Controle Open Tabs Data
-      open: true ,
+      open: true,
       // Start:: Side Navbar List
       sideNavbarList: [
         {
@@ -478,7 +493,7 @@ export default {
       logout: "AuthenticationModule/logout",
     }),
     // End:: Vuex Auth Actions
-     handleClick() {
+    handleClick() {
       this.open = !this.open;
     },
     // Start:: Controle Open Tabs

@@ -584,7 +584,22 @@ export default {
       this.dialogDelete = true;
       this.itemToDelete = item;
     },
-
+    // Start:: Change Activation Status
+    async changeActivationStatus(item) {
+      const REQUEST_DATA = new FormData();
+      REQUEST_DATA.append("_method", "PUT");
+      try {
+        await this.$axios({
+          method: "POST",
+          url: `/products/offers/status/${item.id}`,
+          data: REQUEST_DATA,
+        });
+        this.$message.success(this.$t("MESSAGES.changeActivation"));
+      } catch (error) {
+        this.$message.error(error.response.data.message);
+      }
+    },
+    // End:: Change Activation Status
     async confirmDeleteItem() {
       try {
         await this.$axios({

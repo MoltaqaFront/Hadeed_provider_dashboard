@@ -88,9 +88,10 @@ export default {
       try {
         let res = await this.$axios({
           method: "GET",
-          url: "notification/index",
+          url: "notifications",
           params: {
-            page: this.paginations.current_page
+            page: this.paginations.current_page,
+            
           },
         });
         console.log("All Data ==>", res.data.data);

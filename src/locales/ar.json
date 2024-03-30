@@ -160,12 +160,12 @@
     "Products": {
       "title": "المنتجات",
       "showAll": "كل المنتجات",
-      "add": "إضافة منتج جديد" ,
-      "Total" : "إجمالي سعر المنتجات" ,
-      "tax" : "قيمة الضريبة المضافة" ,
-      "order_total" : "إجمالي الطلب" ,
-      "canacel" : "سبب إلغاء الطلب",
-      "reject" : "سبب رفض الطلب"
+      "add": "إضافة منتج جديد",
+      "Total": "إجمالي سعر المنتجات",
+      "tax": "قيمة الضريبة المضافة",
+      "order_total": "إجمالي الطلب",
+      "canacel": "سبب إلغاء الطلب",
+      "reject": "سبب رفض الطلب"
     },
     "Orders": {
       "title": "الطلبات",
@@ -458,8 +458,8 @@
 
       "totalPrice": "السعر الكلي",
       "orderDate": "تاريخ الطلب",
-      "delivered_date" : "تاريخ التسليم" ,
-      "delivered_time" : "وقت التسليم" ,
+      "delivered_date": "تاريخ التسليم",
+      "delivered_time": "وقت التسليم",
       "orderStatus": "حالة الطلب",
       "actions": "التحكم",
       "OrderPrice": " إجمالي سعر الطلب "
@@ -762,6 +762,11 @@
     "status": "الحالة",
     "products": "المنتجات",
     "companyName": "اسم الشركة",
+    "balance": "الرصيد",
+    "amount": "المبلغ",
+    "account_settlement": "تصفية الحساب",
+    "wallet_history": "تاريخ المحفظه",
+    "transaction_name": "اسم الحركة",
     "providerName": "اسم المورد",
     "add_new_product": "اضافة منتج جديد",
     "product_name": "اسم المنتج",
@@ -780,7 +785,7 @@
     "commercial_register": "السجل التجاري",
     "measures": "القياس",
     "type": "النوع",
-    "notes" : "ملاحظات",
+    "notes": "ملاحظات",
     "messageType": "نوع الرسالة",
     "measure_name": "اسم وحدة القياس",
     "view_measure_data": "وحدة القياس",
@@ -827,7 +832,7 @@
     "descEn": "الوصف بالإنجليزية",
     "gender": "النوع",
     "country": "الدولة",
-    "num_count" : "كمية المنتج",
+    "num_count": "كمية المنتج",
     "address": "العنوان",
     "longitude": "خطوط الطول",
     "latitude": "دوائر العرض",
@@ -1159,7 +1164,7 @@
     "trip_type": "نوع الرحلة",
     "booking_type": "نوع الحجز",
     "trip_date": "تاريخ الرحلة",
-    "adress_name" : "اسم العنوان ",
+    "adress_name": "اسم العنوان ",
     "duration": "المدة",
     "arrival_time": "وقت الحضور",
     "departure_time": "وقت الانطلاق",
@@ -1409,5 +1414,6 @@
   "send_notification": "ارسال الاشعارات",
   "goldenOffers_list": "قائمة العروض الذهبية",
   "price": "السعر",
-  "productName": "اسم المنتج"
+  "productName": "اسم المنتج",
+  "current_balance": "الرصيد الحالي"
 }

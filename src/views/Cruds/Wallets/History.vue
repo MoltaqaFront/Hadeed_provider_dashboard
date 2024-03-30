@@ -2,71 +2,10 @@
   <div class="show_all_content_wrapper">
     <!-- Start:: Main Section -->
     <main>
-      <!--  =========== Start:: Filter Form =========== -->
-      <div
-        class="filter_content_wrapper"
-        :class="{ active: filterFormIsActive }"
-      >
-        <button
-          class="filter_toggler"
-          @click="filterFormIsActive = !filterFormIsActive"
-        >
-          <i class="fal fa-times"></i>
-        </button>
-        <div class="filter_title_wrapper">
-          <h5>{{ $t("TITLES.searchBy") }}</h5>
-        </div>
-        <div class="filter_form_wrapper">
-          <form @submit.prevent="submitFilterForm">
-            <div class="row justify-content-center align-items-center w-100">
-              <!-- Start:: Name Input -->
-              <base-input
-                col="6"
-                type="text"
-                :placeholder="$t('TABLES.Roles.role')"
-                v-model.trim="filterOptions.name"
-              />
-              <!-- End:: Name Input -->
-              <!-- Start:: Status Input -->
-              <base-select-input
-                col="6"
-                :optionsList="activeStatuses"
-                :placeholder="$t('PLACEHOLDERS.status')"
-                v-model="filterOptions.is_active"
-              />
-              <!-- End:: Status Input -->
-            </div>
-
-            <div class="btns_wrapper">
-              <button class="submit_btn" :disabled="isWaitingRequest">
-                <i class="fal fa-search"></i>
-              </button>
-
-              <a-tooltip placement="bottom">
-                <template slot="title">
-                  <span>{{ $t("BUTTONS.rseet_search") }}</span>
-                </template>
-                <span
-                  class="reset_btn"
-                  :disabled="isWaitingRequest"
-                  @click="resetFilter"
-                >
-                  <i class="fal fa-redo"></i>
-                </span>
-              </a-tooltip>
-              <!-- <button class="reset_btn" type="button" :disabled="isWaitingRequest" @click="resetFilter">
-                <i class="fal fa-redo"></i>
-              </button> -->
-            </div>
-          </form>
-        </div>
-      </div>
-      <!--  =========== End:: Filter Form =========== -->
-
       <!--  =========== Start:: Table Title =========== -->
       <div class="table_title_wrapper">
         <div class="title_text_wrapper">
-          <h5>{{ $t("TITLES.roles") }}</h5>
+          <h5>{{ $t("PLACEHOLDERS.wallet_history") }}</h5>
           <button
             v-if="!filterFormIsActive"
             class="filter_toggler"
@@ -75,9 +14,13 @@
             <i class="fal fa-search"></i>
           </button>
         </div>
-        <div class="title_route_wrapper" v-if="$can('roles create', 'roles')">
-          <router-link to="/roles/create">
-            {{ $t("BUTTONS.addRole") }}
+
+        <div
+          class="title_route_wrapper"
+          v-if="$can('regions create', 'regions')"
+        >
+          <router-link to="/areas/create">
+            {{ $t("SIDENAV.Areas.add") }}
           </router-link>
         </div>
       </div>
@@ -94,7 +37,6 @@
         item-class="ltr"
         :items-per-page="paginations.items_per_page"
         hide-default-footer
-        :expanded.sync="expanded"
       >
         <!-- Start:: No Data State -->
         <template v-slot:no-data>
@@ -102,6 +44,7 @@
         </template>
         <!-- Start:: No Data State -->
 
+        <!-- Start:: Item Image -->
         <template v-slot:[`item.id`]="{ item, index }">
           <div class="table_image_wrapper">
             <h6 class="text-danger" v-if="!item.id">
@@ -116,6 +59,17 @@
             </p>
           </div>
         </template>
+        <!-- End:: Item Image -->
+
+        <!-- Start:: Title -->
+        <template v-slot:[`item.title`]="{ item }">
+          <p class="text-danger" v-if="!item.title">
+            {{ $t("TABLES.noData") }}
+          </p>
+          <p v-else>{{ item.title }}</p>
+        </template>
+        <!-- End:: Title -->
+
         <!-- Start:: Activation -->
         <template v-slot:[`item.is_active`]="{ item }">
           <!-- v-if="permissions.activate" -->
@@ -123,7 +77,7 @@
             class="activation"
             dir="ltr"
             style="z-index: 1"
-            v-if="$can('roles activate', 'roles')"
+            v-if="$can('regions activate', 'regions')"
           >
             <v-switch
               class="mt-2"
@@ -136,57 +90,24 @@
         </template>
         <!-- End:: Activation -->
 
-        <!-- Start:: Expanded Row -->
-        <template v-slot:[`item.extend_icon`]="{ item }">
-          <div class="actions">
-            <button class="btn_expand" @click="expandItem(item)">
-              <i class="fad fa-angle-down"></i>
-            </button>
-          </div>
-        </template>
-        <template v-slot:expanded-item="{ item }">
-          <td colspan="4" class="fadeIn">
-            <div class="cards_wrapper p-4" v-if="item.permissions">
-              <div
-                v-for="element in item.permissions"
-                :key="element.id"
-                class="content_wrapper"
-              >
-                <p class="group_title">{{ element.name }}</p>
-
-                <div class="wrapper">
-                  <div
-                    class="item_data_card"
-                    v-for="permission in element.controls"
-                    :key="permission.id"
-                  >
-                    <div class="card_title">
-                      <h5>
-                        {{ permission.name }}
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <p class="text-center text-danger fs-6" v-else>
-              {{ $t("TABLES.noData") }}
-            </p>
-          </td>
-        </template>
-        <!-- End:: Expanded Row -->
-
         <!-- Start:: Actions -->
         <template v-slot:[`item.actions`]="{ item }">
           <div class="actions">
-            <span class="blue-grey--text text--darken-1" v-if="item.id === 1">
-              <i class="far fa-horizontal-rule"></i>
-            </span>
+            <a-tooltip
+              placement="bottom"
+              v-if="$can('regions show', 'regions')"
+            >
+              <template slot="title">
+                <span>{{ $t("BUTTONS.show") }}</span>
+              </template>
+              <button class="btn_show" @click="showItem(item)">
+                <i class="fal fa-eye"></i>
+              </button>
+            </a-tooltip>
 
             <a-tooltip
               placement="bottom"
-              v-if="item.id !== 1 && $can('roles edit', 'roles')"
+              v-if="$can('regions edit', 'regions')"
             >
               <template slot="title">
                 <span>{{ $t("BUTTONS.edit") }}</span>
@@ -198,7 +119,7 @@
 
             <a-tooltip
               placement="bottom"
-              v-if="item.id !== 1 && $can('roles delete', 'roles')"
+              v-if="$can('regions delete', 'regions')"
             >
               <template slot="title">
                 <span>{{ $t("BUTTONS.delete") }}</span>
@@ -219,16 +140,31 @@
 
         <!-- ======================== Start:: Dialogs ======================== -->
         <template v-slot:top>
+          <!-- Start:: Image Modal -->
+          <image-modal
+            v-if="dialogImage"
+            :modalIsOpen="dialogImage"
+            :modalImage="selectedItemImage"
+            @toggleModal="dialogImage = !dialogImage"
+          />
+          <!-- End:: Image Modal -->
+
+          <!-- Start:: Description Modal -->
+          <description-modal
+            v-if="dialogDescription"
+            :modalIsOpen="dialogDescription"
+            :modalDesc="selectedDescriptionTextToShow"
+            @toggleModal="dialogDescription = !dialogDescription"
+          />
+          <!-- End:: Description Modal -->
+
           <!-- Start:: Delete Modal -->
           <v-dialog v-model="dialogDelete">
             <v-card>
               <v-card-title class="text-h5 justify-center" v-if="itemToDelete">
                 {{
                   $t("TITLES.DeleteConfirmingMessage", {
-                    name:
-                      getAppLocale == "ar"
-                        ? itemToDelete.name_ar
-                        : itemToDelete.name_en,
+                    name: itemToDelete.name,
                   })
                 }}
               </v-card-title>
@@ -276,18 +212,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "AllRoles",
+  name: "AllRegions",
 
   computed: {
     ...mapGetters({
       getAppLocale: "AppLangModule/getAppLocale",
+      getCountriesData: "ApiGetsModule/allCountriesData",
     }),
 
     activeStatuses() {
       return [
+        {
+          id: null,
+          name: this.$t("STATUS.all"),
+          value: null,
+        },
         {
           id: 1,
           name: this.$t("STATUS.active"),
@@ -312,7 +254,8 @@ export default {
       // Start:: Filter Data
       filterFormIsActive: false,
       filterOptions: {
-        name: null,
+        title: null,
+        country_id: null,
         is_active: null,
       },
       // End:: Filter Data
@@ -321,42 +264,48 @@ export default {
       searchValue: "",
       tableHeaders: [
         {
-          text: this.$t("TABLES.Roles.serialNumber"),
+          text: this.$t("TABLES.StoresTypes.serialNumber"),
           value: "id",
           align: "center",
           width: "80",
           sortable: false,
         },
         {
-          text: this.$t("TABLES.Roles.role"),
-          value: "name",
+          text: this.$t("PLACEHOLDERS.transaction_name"),
+          value: "transaction_type",
           sortable: false,
           align: "center",
         },
         {
-          text: this.$t("TABLES.Roles.role"),
-          value: "is_active",
+          text: this.$t("PLACEHOLDERS.amount"),
+          value: "balance",
           sortable: false,
           align: "center",
         },
+
         {
-          text: this.$t("TABLES.Roles.permissions"),
-          value: "extend_icon",
-          align: "center",
+          text: this.$t("TABLES.Products.created_at"),
+          value: "created_at",
           sortable: false,
+          align: "center",
         },
+
         {
-          text: this.$t("TABLES.Roles.actions"),
-          value: "actions",
-          sortable: false,
+          text: this.$t("PLACEHOLDERS.notes"),
+          value: "data.reason",
           align: "center",
+          sortable: false,
+          width: "120",
         },
       ],
       tableRows: [],
-      expanded: [],
       // End:: Table Data
 
       // Start:: Dialogs Control Data
+      dialogImage: false,
+      selectedItemImage: null,
+      dialogDescription: false,
+      selectedDescriptionTextToShow: "",
       dialogDelete: false,
       itemToDelete: null,
       // End:: Dialogs Control Data
@@ -368,8 +317,6 @@ export default {
         items_per_page: 6,
       },
       // End:: Pagination Data
-
-      name: "",
     };
   },
 
@@ -383,24 +330,11 @@ export default {
   },
 
   methods: {
-    // Start:: Handel Filter
-    async submitFilterForm() {
-      if (this.$route.query.page !== "1") {
-        await this.$router.push({ path: "/roles/all", query: { page: 1 } });
-      }
-      this.setTableRows();
-    },
-
-    async resetFilter() {
-      this.filterOptions.name = null;
-      this.filterOptions.is_active = null;
-
-      if (this.$route.query.page !== "1") {
-        await this.$router.push({ path: "/roles/all", query: { page: 1 } });
-      }
-      this.setTableRows();
-    },
-    // End:: Handel Filter
+    // Start:: Vuex Actions
+    ...mapActions({
+      getCountries: "ApiGetsModule/getCountries",
+    }),
+    // End:: Vuex Actions
 
     // Start:: Set Table Rows
     updateRouterQueryParam(pagenationValue) {
@@ -415,43 +349,18 @@ export default {
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
-    // Start:: Change Activation Status
-    async changeActivationStatus(item) {
-      const REQUEST_DATA = new FormData();
-      REQUEST_DATA.append("_method", "PUT");
-      try {
-        await this.$axios({
-          method: "POST",
-          url: `roles/status/${item.id}`,
-          data: REQUEST_DATA,
-        });
-        this.$message.success(this.$t("MESSAGES.changeActivation"));
-      } catch (error) {
-        this.$message.error(error.response.data.message);
-      }
-    },
-    // End:: Change Activation Status
     async setTableRows() {
       this.loading = true;
-
-      if (this.filterOptions.name) {
-        this.name = this.filterOptions.name.toLowerCase();
-      } else {
-        this.name = "";
-      }
       try {
         let res = await this.$axios({
           method: "GET",
-          url: "roles",
+          url: "wallets",
           params: {
             page: this.paginations.current_page,
-            name: this.filterOptions.name,
-            isActive: this.filterOptions.is_active?.value,
           },
         });
         this.loading = false;
-        // console.log("All Data ==>", res.data.data);
-        this.tableRows = res.data.data;
+        this.tableRows = res.data.data.wallets;
         this.paginations.last_page = res.data.meta.last_page;
         this.paginations.items_per_page = res.data.meta.per_page;
       } catch (error) {
@@ -461,40 +370,49 @@ export default {
     },
     // End:: Set Table Rows
 
-    // Start:: Control Expended Row
-    expandItem(item) {
-      const indexExpanded = this.expanded.findIndex((i) => i === item);
-      if (indexExpanded > -1) {
-        this.expanded.splice(indexExpanded, 1);
-      } else {
-        this.expanded = [];
-        this.expanded.push(item);
+    // Start:: Change Activation Status
+    async changeActivationStatus(item) {
+      const REQUEST_DATA = new FormData();
+      // Start:: Append Request Data
+      REQUEST_DATA.append("_method", "PUT");
+      try {
+        await this.$axios({
+          method: "POST",
+          url: `regions/status/${item.id}`,
+          data: REQUEST_DATA,
+        });
+        this.$message.success(this.$t("MESSAGES.changeActivation"));
+      } catch (error) {
+        this.$message.error(error.response.data.message);
       }
     },
-    // End:: Control Expended Row
+    // End:: Change Activation Status
 
     // ==================== Start:: Crud ====================
-    // ===== Start:: Edit
+    // ===== Start:: End
     editItem(item) {
-      this.$router.push({ path: `/roles/edit/${item.id}` });
+      this.$router.push({ path: `/areas/edit/${item.id}` });
     },
-    // ===== End:: Edit
+
+    showItem(item) {
+      this.$router.push({ path: `/areas/show/${item.id}` });
+    },
+    // ===== End:: End
 
     // ===== Start:: Delete
     selectDeleteItem(item) {
       this.dialogDelete = true;
       this.itemToDelete = item;
     },
+
     async confirmDeleteItem() {
       try {
         await this.$axios({
           method: "DELETE",
-          url: `roles/${this.itemToDelete.id}`,
+          url: `regions/${this.itemToDelete.id}`,
         });
         this.dialogDelete = false;
-        this.tableRows = this.tableRows.filter((item) => {
-          return item.id != this.itemToDelete.id;
-        });
+        this.setTableRows();
         this.$message.success(this.$t("MESSAGES.deletedSuccessfully"));
       } catch (error) {
         this.dialogDelete = false;
@@ -502,6 +420,7 @@ export default {
       }
     },
     // ===== End:: Delete
+
     // ==================== End:: Crud ====================
   },
 
@@ -514,6 +433,8 @@ export default {
       this.paginations.current_page = +this.$route.query.page;
     }
     this.setTableRows();
+    this.getCountries();
+
     // End:: Fire Methods
   },
 };

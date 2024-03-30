@@ -82,7 +82,7 @@
           />
           <base-input
             col="6"
-            type="text"
+            type="textarea"
             :placeholder="$t('PLACEHOLDERS.desc')"
             v-model.trim="data.desc"
             disabled

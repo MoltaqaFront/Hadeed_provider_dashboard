@@ -154,6 +154,12 @@ import subCategoryHome from "../views/Cruds/SubCategory/Home.vue";
 import ProviderDataHome from "../views/Cruds/ProvidersData/Home.vue";
 import ProvidersData from "../views/Cruds/ProvidersData/ProvidersData.vue";
 // end:: Provider Data  updates
+// start:: Provider Data updates
+import WalletsHome from "../views/Cruds/Wallets/Home.vue";
+import Balance from "../views/Cruds/Wallets/Balance.vue";
+import History from "../views/Cruds/Wallets/History.vue";
+
+// end:: Provider Data  updates
 
 // ============== Start:: Financial Reports Routes
 
@@ -841,6 +847,42 @@ const routes = [
             path: "show/:id",
             name: "ShowRates",
             component: ShowRates,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "rates show",
+                subject: "rates",
+              },
+            },
+          },
+        ],
+      },
+      // Start:: Carts Routes Config
+      // Start:: Rates Routes Config
+      {
+        path: "/wallets",
+        name: "WalletsHome",
+        component: WalletsHome,
+        meta: {
+          middleware: [auth],
+        },
+        children: [
+          {
+            path: "balance",
+            name: "Balance",
+            component: Balance,
+            meta: {
+              middleware: [auth],
+              // requiresPermission: {
+              //   action: "rates index",
+              //   subject: "rates",
+              // },
+            },
+          },
+          {
+            path: "history",
+            name: "History",
+            component: History,
             meta: {
               middleware: [auth],
               requiresPermission: {
