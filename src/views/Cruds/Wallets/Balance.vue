@@ -29,7 +29,8 @@
               @click="$router.push('/wallets/history')"
               class="mt-2"
               styleType="primary_btn"
-              style="font-size: 16px"
+              style="font-size: 16px; color: white; letter-spacing: 0"
+              :loading="loading"
             >
               {{ $t("PLACEHOLDERS.wallet_history") }}
             </v-btn>
@@ -47,6 +48,7 @@ export default {
   name: "Balance",
   data() {
     return {
+      loading: false,
       data: {
         balance: null,
       },
@@ -72,6 +74,8 @@ export default {
           method: "POST",
           url: `wallets`,
         });
+        this.$message.success(this.$t("MESSAGES.sentSuccessfully"));
+
         // console.log("Cities =>", res.data.data);
         // this.data.balance = res.data.data.balance;
         // console.log("first", this.data.country_id);

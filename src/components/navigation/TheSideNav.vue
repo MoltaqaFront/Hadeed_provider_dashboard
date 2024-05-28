@@ -123,7 +123,7 @@
       </div>
       <!-- End:: banks Route -->
 
-      <!-- Start:: Main Category Route -->
+      <!-- Start:: Wallets Route -->
       <div
         class="home_route"
         @click="$emit('fireToggleNavDrawerEmit')"
@@ -143,7 +143,7 @@
           </span>
         </router-link>
       </div>
-      <!-- End:: Main Category Route -->
+      <!-- End:: Wallets Route -->
       <!-- Start:: clients Route -->
       <div
         class="home_route"
@@ -316,7 +316,27 @@
         </router-link>
       </div>
       <!-- End:: settings Route -->
-
+      <!-- Start:: providers Route -->
+      <div
+        class="home_route"
+        @click="$emit('fireToggleNavDrawerEmit')"
+        v-if="$can('provider_admins index', 'provider_admins')"
+      >
+        <router-link to="/provider/profile-update">
+          <span class="route_icon">
+            <img
+              src="@/assets/media/icons/ui_icons/users.svg"
+              alt="icon"
+              width="40"
+              height="40"
+            />
+          </span>
+          <span class="route_text">
+            {{ $t("PLACEHOLDERS.Update_provider_data") }}
+          </span>
+        </router-link>
+      </div>
+      <!-- End:: providers Route -->
       <!-- Start:: users Route -->
       <div
         class="home_route"

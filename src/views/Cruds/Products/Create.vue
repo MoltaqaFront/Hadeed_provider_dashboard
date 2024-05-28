@@ -133,21 +133,7 @@
             />
             <!-- End:: weights Input -->
             <!-- Start:: Deactivate Switch Input -->
-            <div
-              class="input_wrapper switch_wrapper my-5"
-              v-if="!data?.productName?.id"
-            >
-              <v-switch
-                color="green"
-                :label="
-                  data.active
-                    ? $t('PLACEHOLDERS.provider')
-                    : $t('PLACEHOLDERS.Administration')
-                "
-                v-model="data.active"
-                hide-details
-              ></v-switch>
-            </div>
+
             <!-- start category -->
             <base-select-input
               col="6"
@@ -257,24 +243,6 @@ export default {
         this.submitForm();
         return;
       }
-    },
-    validateInput() {
-      // Remove non-Arabic characters from the input
-      if (this.data?.productNameAr) {
-        this.data.productNameAr = this.data.productNameAr.replace(
-          /[^\u0600-\u06FF\s]/g,
-          ""
-        );
-      } else {
-        this.data.descAr = this.data.descAr.replace(/[^\u0600-\u06FF\s]/g, "");
-      }
-    },
-    removeArabicCharacters() {
-      this.data.productNameEn = this.data.productNameEn.replace(
-        this.EnRegex,
-        ""
-      );
-      this.data.descEn = this.data.descEn.replace(this.EnRegex, "");
     },
 
     // End:: validate Form Inputs
@@ -388,17 +356,17 @@ export default {
       REQUEST_DATA.append("description_en", this.data.descEn);
       REQUEST_DATA.append("description_ar", this.data.descAr);
       REQUEST_DATA.append("price", this.data.price);
-      // REQUEST_DATA.append("is_active", +this.data.active);
+      REQUEST_DATA.append("is_active", +this.data.active);
       // End :: Append Request Data
       if (this.data?.productName?.id) {
-        REQUEST_DATA.append("_method", "PUT");
+        // REQUEST_DATA.append("_method", "PUT");
       }
 
       try {
         if (this.data?.productName?.id) {
           await this.$axios({
             method: "POST",
-            url: `products/${this.data?.productName?.id}`,
+            url: `/products/offers/${this.data?.productName?.id}`,
             data: REQUEST_DATA,
           });
         } else {

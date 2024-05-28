@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/dashboard" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/provider" : "/",
 
   pwa: {
     name: "Aqar admin Dashboard",

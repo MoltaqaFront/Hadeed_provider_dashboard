@@ -270,7 +270,7 @@ export default {
     validateInput() {
       // Remove non-Arabic characters from the input
       this.data.productNameAr = this.data.productNameAr.replace(
-        /[^\u0600-\u06FF\s]/g,
+        /[^\u0600-\u06FF\s0-9]/g,
         ""
       );
     },

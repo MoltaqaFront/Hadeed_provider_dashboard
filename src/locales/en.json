@@ -756,6 +756,8 @@
     "provider": "provider",
     "balance": "Balance",
     "companyName": "Company Name",
+    "supplier_settlement": "Supplier Settlement",
+    "Update_provider_data": "Update Provider Data",
     "wallets": "Wallets",
     "amount": "Amount",
     "transaction_name": "Transaction Name",

@@ -359,7 +359,7 @@ export default {
           sortable: false,
         },
         {
-          text: this.$t("PLACEHOLDERS.bank_name"),
+          text: this.$t("PLACEHOLDERS.product_name"),
           value: "name",
           sortable: false,
           align: "center",
@@ -480,7 +480,7 @@ export default {
       try {
         let res = await this.$axios({
           method: "GET",
-          url: "products",
+          url: "products?mine=true",
           params: {
             // owner:localStorage.getItem("Provider_admin_dashboard_user_id"),
             mine: 1,
@@ -558,7 +558,7 @@ export default {
       try {
         await this.$axios({
           method: "POST",
-          url: `products/status/${item.id}`,
+          url: `/products/offers/status/${item.id}`,
           data: REQUEST_DATA,
         });
         this.$message.success(this.$t("MESSAGES.changeActivation"));
@@ -604,7 +604,7 @@ export default {
       try {
         await this.$axios({
           method: "DELETE",
-          url: `products/${this.itemToDelete.id}`,
+          url: `products/offers/${this.itemToDelete.id}`,
         });
         this.dialogDelete = false;
         this.setTableRows();
