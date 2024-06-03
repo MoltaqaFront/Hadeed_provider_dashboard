@@ -33,7 +33,7 @@
                 col="6"
                 :optionsList="activeStatuses"
                 :placeholder="$t('PLACEHOLDERS.status')"
-                v-model="filterOptions.status"
+                v-model="filterOptions.active"
               />
               <!-- End:: Status Input -->
             </div>
@@ -137,16 +137,54 @@
         <!-- Start:: Actions -->
         <template v-slot:[`item.actions`]="{ item }">
           <div class="actions">
-            <a-tooltip placement="bottom">
+            <!-- start::accept order -->
+            <a-tooltip placement="bottom" v-if="item._status == 'pending'">
               <template slot="title">
-                <span>{{ $t("BUTTONS.edit") }}</span>
+                <span>{{ $t("BUTTONS.confirmation") }}</span>
               </template>
 
               <button class="btn_edit" @click="selectUpdateItem(item)">
-                <i class="fal fa-edit"></i>
+                <i class="fas fa-check-double"></i>
               </button>
             </a-tooltip>
+            <!-- end:: accept order -->
+            <!-- start::reject item -->
+            <a-tooltip placement="bottom" v-if="item._status == 'pending'">
+              <template slot="title">
+                <span>{{ $t("BUTTONS.reject") }}</span>
+              </template>
 
+              <button class="btn_edit" @click="selectRejectItem(item)">
+                <i class="fas fa-times-square" style="color: red"></i>
+              </button>
+            </a-tooltip>
+            <!-- end::reject order -->
+            <!-- start::on the way status -->
+            <!-- On The Way order -->
+            <a-tooltip placement="bottom" v-if="item._status == 'paid'">
+              <template slot="title">
+                <span>{{ $t("BUTTONS.on_the_way") }}</span>
+              </template>
+              <button class="btn_show" @click="onTheWayOrder(item)">
+                <span class="text-danger text-h5">
+                  <i class="fas fa-car"></i>
+                </span>
+              </button>
+            </a-tooltip>
+            <!-- on The Way order -->
+            <!-- deliverd -->
+            <a-tooltip placement="bottom" v-if="item._status == 'on_the_way'">
+              <template slot="title">
+                <span>{{ $t("BUTTONS.delivered") }}</span>
+              </template>
+              <button class="btn_show" @click="delivered(item)">
+                <span class="text-danger text-h5">
+                  <i class="fas fa-box"></i>
+                </span>
+              </button>
+            </a-tooltip>
+            <!-- delived -->
+            <!-- End:: on the way status -->
             <a-tooltip placement="bottom">
               <template slot="title">
                 <span>{{ $t("BUTTONS.download_invoice") }}</span>
@@ -203,18 +241,18 @@
                 class="text-h5 justify-center w-100"
                 v-if="itemToUpdate"
               >
-                {{ $t("MESSAGES.changeItem", { name: itemToUpdate.id }) }}
+                {{ $t("MESSAGES.acceptOrder", { name: itemToUpdate.id }) }}
 
                 <div class="filter_form_wrapper w-100">
                   <form class="w-100">
-                    <base-select-input
+                    <!-- <base-select-input
                       col="12"
                       :optionsList="orderTypes"
                       :placeholder="$t('PLACEHOLDERS.status')"
                       v-model="status_modal"
-                    />
+                    /> -->
 
-                    <div
+                    <!-- <div
                       class="form-group"
                       v-if="status_modal && status_modal.value === 'rejected'"
                     >
@@ -226,19 +264,36 @@
                         v-model="reason"
                         required
                       />
-                    </div>
-                    <div
-                      class="form-group"
-                      v-if="status_modal && status_modal.value === 'accepted'"
-                    >
-                      <base-input
-                        col="12"
-                        rows="3"
-                        type="date"
-                        :placeholder="$t('TABLES.Orders.delivered_date')"
-                        v-model="date_time"
-                        required
-                      />
+                    </div> -->
+                    <div class="form-group">
+                      <!-- datePicker -->
+                      <v-col cols="6">
+                        <label for="birthday" class="mx-2">{{
+                          $t("PLACEHOLDERS.choose_date")
+                        }}</label>
+                        <input
+                          class="date-input"
+                          type="date"
+                          id="birthday"
+                          name="birthday"
+                          v-model="datePicker"
+                        />
+                      </v-col>
+                      <!-- datePicker -->
+                      <!-- timePicker -->
+                      <v-col cols="6">
+                        <label for="appt" class="mx-2">{{
+                          $t("PLACEHOLDERS.choose_delivery_time")
+                        }}</label>
+                        <input
+                          class="date-input"
+                          type="time"
+                          id="appt"
+                          name="appt"
+                          v-model="timePicker"
+                        />
+                      </v-col>
+                      <!-- timePicker -->
                       <input type="file" @change="handleFileUpload" />
                     </div>
                   </form>
@@ -257,6 +312,50 @@
             </v-card>
           </v-dialog>
           <!-- End:: Update Modal -->
+          <!-- start::reject Modal -->
+          <v-dialog v-model="dialogReject">
+            <v-card>
+              <v-card-title
+                class="text-h5 justify-center w-100"
+                v-if="itemToReject"
+              >
+                {{ $t("MESSAGES.rejectOrder", { name: itemToReject.id }) }}
+
+                <div class="filter_form_wrapper w-100">
+                  <form class="w-100">
+                    <!-- <base-select-input
+                      col="12"
+                      :optionsList="orderTypes"
+                      :placeholder="$t('PLACEHOLDERS.status')"
+                      v-model="status_modal"
+                    /> -->
+
+                    <div class="form-group">
+                      <base-input
+                        col="12"
+                        rows="3"
+                        type="textarea"
+                        :placeholder="$t('PLACEHOLDERS.reason')"
+                        v-model="reason"
+                        required
+                      />
+                    </div>
+                  </form>
+                </div>
+              </v-card-title>
+              <v-card-actions>
+                <v-btn class="modal_confirm_btn" @click="confirmrejectStatus">{{
+                  $t("BUTTONS.ok")
+                }}</v-btn>
+
+                <v-btn class="modal_cancel_btn" @click="dialogUpdate = false">{{
+                  $t("BUTTONS.cancel")
+                }}</v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!-- End::reject Modal -->
         </template>
       </v-data-table>
       <!--  =========== End:: Data Table =========== -->
@@ -511,14 +610,15 @@ export default {
       loading: false,
       isWaitingRequest: false,
       // End:: Loading Data
-
+      datePicker: null,
+      timePicker: null,
       // Start:: Filter Data
       filterFormIsActive: false,
       filterOptions: {
         orderNumber: null,
         clientName: null,
         clientPhone: null,
-        status: null,
+        active: null,
       },
       // End:: Filter Data
 
@@ -583,6 +683,10 @@ export default {
       dialogUpdate: false,
       itemToUpdate: null,
       // End:: Dialogs Control Data
+      //Start:: Dialog Reject Data
+      itemToReject: null,
+      dialogReject: false,
+      //End:: Dilaog Reject Data
 
       // Start:: Pagination Data
       paginations: {
@@ -638,6 +742,47 @@ export default {
 
   methods: {
     // Start:: Handel Filter
+    // On The Way order
+    async onTheWayOrder(item) {
+      const REQUEST_DATA = new FormData();
+      REQUEST_DATA.append("status", "on_the_way");
+      try {
+        await this.$axios({
+          method: "POST",
+          url: `orders/change-order-status/${item.id}`,
+          data: REQUEST_DATA,
+        });
+        this.dialogDelete = false;
+        console.log("item to delete", this.itemToDelete);
+        this.setTableRows();
+        this.$message.success(this.$t("MESSAGES.changedSuccessfully"));
+      } catch (error) {
+        this.dialogDelete = false;
+        this.$message.error(error.response.data.message);
+      }
+    },
+    // On The Way order
+    // start::deliverd
+    async delivered(item) {
+      const REQUEST_DATA = new FormData();
+      REQUEST_DATA.append("status", "delivered");
+      try {
+        await this.$axios({
+          method: "POST",
+          url: `orders/change-order-status/${item.id}`,
+          data: REQUEST_DATA,
+        });
+        this.dialogDelete = false;
+        console.log("item to delete", this.itemToDelete);
+        this.setTableRows();
+        this.$message.success(this.$t("MESSAGES.changedSuccessfully"));
+      } catch (error) {
+        this.dialogDelete = false;
+        this.$message.error(error.response.data.message);
+      }
+    },
+    // end::delivered
+
     async submitFilterForm() {
       this.setTableRows();
     },
@@ -646,7 +791,7 @@ export default {
       this.filterOptions.orderNumber = null;
       this.filterOptions.clientName = null;
       this.filterOptions.clientPhone = null;
-      this.filterOptions.status = null;
+      this.filterOptions.active = null;
 
       if (this.$route.query.page !== "1") {
         await this.$router.push({ path: "/orders/all", query: { page: 1 } });
@@ -682,6 +827,7 @@ export default {
             userName: this.filterOptions.clientName,
             userMobile: this.filterOptions.clientPhone,
             orderStatus: this.filterOptions.status?.key,
+            status: this.filterOptions.active?.value,
           },
         });
         this.loading = false;
@@ -753,22 +899,23 @@ export default {
       this.itemToUpdate = item;
       // console.log(item);
     },
-
+    selectRejectItem(item) {
+      this.dialogReject = true;
+      this.itemToReject = item;
+    },
     async confirmChangeStatus() {
       try {
         const requestData = new FormData();
-
-        const formattedDate = moment(this.date_time.trim()).format(
-          "YYYY/MM/DD HH:mm:ss"
-        );
-
-        requestData.append("delivery_date", formattedDate);
-        requestData.append("status", this.status_modal.value);
+        // if (this.reason) {
+        //   requestData.append("rejection_reason", this.reason);
+        // } else {
         requestData.append("invoice", this.file);
-
-        if (this.reason) {
-          requestData.append("rejection_reason", this.reason);
-        }
+        requestData.append(
+          `delivery_date`,
+          `${this.datePicker} ${this.timePicker}:00`
+        );
+        requestData.append(`status`, `accepted`);
+        // }
 
         // const requestData = {
         //   status: this.status_modal.value
@@ -786,7 +933,7 @@ export default {
 
         await this.$axios({
           method: "POST",
-          url: `orders/change-order-status/${this.itemToUpdate.id}`,
+          url: `orders/change-order-status/${this.itemToUpdate?.id}`,
           data: requestData,
         });
 
@@ -800,7 +947,52 @@ export default {
         this.$message.error(error.response.data.message);
       }
     },
+    async confirmrejectStatus() {
+      try {
+        const requestData = new FormData();
+        // if (this.reason) {
+        requestData.append("rejection_reason", this.reason);
+        requestData.append("status", "rejected");
 
+        // } else {
+        // requestData.append("invoice", this.file);
+        // requestData.append(
+        //   `delivery_date`,
+        //   `${this.datePicker} ${this.timePicker}:00`
+        // );
+        // requestData.append(`status`, `approve`);
+        // }
+
+        // const requestData = {
+        //   status: this.status_modal.value
+        // };
+
+        // if (this.reason.trim() !== '') {
+        //   requestData.rejection_reason = this.reason.trim();
+        // };
+        // if (this.date_time) {
+        //
+        // };
+        // if (this.file) {
+        //   requestData.invoice = this.file.trim();
+        // };
+
+        await this.$axios({
+          method: "POST",
+          url: `orders/change-order-status/${this.itemToReject?.id}`,
+          data: requestData,
+        });
+
+        this.dialogReject = false;
+        this.setTableRows();
+        this.$message.success(this.$t("MESSAGES.changedSuccessfully"));
+        this.status_modal = null;
+      } catch (error) {
+        this.dialogReject = false;
+        this.status_modal = null;
+        this.$message.error(error.response.data.message);
+      }
+    },
     showChat(item) {
       this.$router.push({ path: `/chat/show/${item}` });
     },
@@ -862,5 +1054,14 @@ td {
     height: 100px !important;
     display: block;
   }
+}
+label {
+  color: #ffa000;
+  font-size: 14px;
+  font-weight: 500;
+}
+.date-input {
+  border: 1px solid #ffa000;
+  padding: 10px 20px;
 }
 </style>
