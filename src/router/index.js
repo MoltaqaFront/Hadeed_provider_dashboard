@@ -149,7 +149,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import auth from "../middleware/auth.js";
 import subCategoryHome from "../views/Cruds/SubCategory/Home.vue";
-
 // start:: Provider Data updates
 import ProviderDataHome from "../views/Cruds/ProvidersData/Home.vue";
 import ProvidersData from "../views/Cruds/ProvidersData/ProvidersData.vue";
@@ -158,6 +157,7 @@ import ProvidersData from "../views/Cruds/ProvidersData/ProvidersData.vue";
 import WalletsHome from "../views/Cruds/Wallets/Home.vue";
 import Balance from "../views/Cruds/Wallets/Balance.vue";
 import History from "../views/Cruds/Wallets/History.vue";
+import ChatOrders from "../views/Cruds/Orders/Chat.vue";
 
 // end:: Provider Data  updates
 
@@ -752,6 +752,18 @@ const routes = [
               requiresPermission: {
                 action: "order_items show",
                 subject: "order_items",
+              },
+            },
+          },
+          {
+            path: "chat/:id",
+            name: "ChatOrders",
+            component: ChatOrders,
+            meta: {
+              middleware: [auth],
+              requiresPermission: {
+                action: "orders show",
+                subject: "orders",
               },
             },
           },

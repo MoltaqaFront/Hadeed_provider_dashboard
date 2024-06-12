@@ -107,7 +107,7 @@ export default {
       // Start:: Append Request Data (JSON)
       REQUEST_DATA.append("email", this.loginData.email);
       REQUEST_DATA.append("password", this.loginData.password);
-      // REQUEST_DATA.append("fcm_token", this.loginData.device_token);
+      REQUEST_DATA.append("device_token", this.device_token);
 
       // End:: Append Request Data (JSON)
 
@@ -157,7 +157,7 @@ export default {
       const messaging = firebase.messaging();
       try {
         const token = await messaging.getToken(); // Get the FCM token
-        this.loginData.device_token = token;
+        this.device_token = token;
         // console.log('FCM token:', token);
       } catch (error) {
         console.error('Error requesting permission/token:', error);

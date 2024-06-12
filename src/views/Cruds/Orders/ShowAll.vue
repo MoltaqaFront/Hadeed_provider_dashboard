@@ -184,6 +184,16 @@
               </button>
             </a-tooltip>
             <!-- delived -->
+            <!-- start chat -->
+            <a-tooltip placement="bottom" v-if="item.chat_id != null">
+              <template slot="title">
+                <span>{{ $t("PLACEHOLDERS.admin_chat") }}</span>
+              </template>
+              <button class="btn_show" @click="selectChatItem(item)">
+                <i class="fab fa-rocketchat"></i>
+              </button>
+            </a-tooltip>
+            <!-- end chat -->
             <!-- End:: on the way status -->
             <a-tooltip placement="bottom">
               <template slot="title">
@@ -195,7 +205,7 @@
               </button>
             </a-tooltip>
 
-            <a-tooltip
+            <!-- <a-tooltip
               placement="bottom"
               v-if="
                 item.status !== 'finished' &&
@@ -209,7 +219,7 @@
               <button class="btn_show" @click="showChat(item.chat_id)">
                 <i class="fab fa-rocketchat"></i>
               </button>
-            </a-tooltip>
+            </a-tooltip> -->
 
             <a-tooltip
               placement="bottom"
@@ -348,7 +358,7 @@
                   $t("BUTTONS.ok")
                 }}</v-btn>
 
-                <v-btn class="modal_cancel_btn" @click="dialogUpdate = false">{{
+                <v-btn class="modal_cancel_btn" @click="dialogReject = false">{{
                   $t("BUTTONS.cancel")
                 }}</v-btn>
                 <v-spacer></v-spacer>
@@ -742,6 +752,9 @@ export default {
 
   methods: {
     // Start:: Handel Filter
+    selectChatItem(item) {
+      this.$router.push({ path: `/orders/chat/${item.chat_id}` });
+    },
     // On The Way order
     async onTheWayOrder(item) {
       const REQUEST_DATA = new FormData();

@@ -23,18 +23,18 @@ import "./plugins/googleMaps";
 import "./plugins/formComponents";
 import "./plugins/globalComponents";
 import "./plugins/3rdPartyLibraries";
-
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 import firebase from "firebase/app";
 import "firebase/firebase-messaging";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA1Qhu0dnmDepSs_-nUKSpGBIX42H00DKI",
-  authDomain: "akry-2653b.firebaseapp.com",
-  projectId: "akry-2653b",
-  storageBucket: "akry-2653b.appspot.com",
-  messagingSenderId: "35605685091",
-  appId: "1:35605685091:web:ca117d8fa3feff6fef2956",
-  measurementId: "G-YM05RMWG2B",
+  apiKey: "AIzaSyCvzX2OCaR7YMhl7fFmWDCfVbTIdBdC5GE",
+  authDomain: "alhdeed-8458e.firebaseapp.com",
+  projectId: "alhdeed-8458e",
+  storageBucket: "alhdeed-8458e.appspot.com",
+  messagingSenderId: "897485221553",
+  appId: "1:897485221553:web:63df4ada76e8201afa3c90",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -47,7 +47,24 @@ import { abilitiesPlugin } from "@casl/vue";
 Vue.use(abilitiesPlugin, ability);
 
 // casl vue permissions
+window.Pusher = Pusher;
 
+window.Echo = new Echo({
+  broadcaster: "pusher",
+  key: "5d41076e446d34f710e2",
+  cluster: "eu",
+  forceTLS: true,
+  disableStats: true,
+  enabledTransports: ["ws", "wss"],
+  // authEndpoint: "https://backend.alhdeed.com/dashboard-api/v1/auth/login", // Update with the correct auth endpoint
+  auth: {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        "qarbcom_provider_dashboard_user_token"
+      )}`, // Use getItem() to retrieve the value
+    },
+  },
+});
 // Start:: Set App Lang  & Theme
 store.dispatch("AppLangModule/handelAppDefaultLanguage");
 store.dispatch("AppThemeModule/handelAppDefaultTheme");
